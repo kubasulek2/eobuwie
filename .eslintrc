@@ -10,6 +10,10 @@
     "semi": [
       2,
       "always"
+    ],
+    "eqeqeq": [
+      "error",
+      "always"
     ]
   }
 }
