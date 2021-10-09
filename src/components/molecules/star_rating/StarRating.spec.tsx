@@ -30,7 +30,7 @@ it('Displays right score', () => {
 
 it('Displays right vote\'s number', () => {
   render(<StarRating score={4.5} votes={100} />);
-  screen.getByText(100);
+  screen.getByText("100");
 });
 
 

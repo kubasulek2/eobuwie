@@ -18,7 +18,7 @@ const StarRating: VFC<StarRatingProps> = ({score, votes, id, size = "medium"}) =
     >
       <div
         className={styles.wrapper}
-        aria-label={`Ocena: ${ score }. Na podstawie ${ votes } głosów.`}
+        aria-label={`Rating: ${ score }. Based on ${ votes } votes.`}
       >
         {[1, 2, 3, 4, 5].map(num => <Star rating={scoreToStarValue(score, num)} size={size} />)}
       </div>

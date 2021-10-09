@@ -6,119 +6,137 @@ Object {
   "baseElement": <body>
     <div>
       <div
-        aria-label="Ocena: 5. Na podstawie 100 głosów."
-        class="container medium"
+        class="container container_medium"
         data-testid="star_rating"
       >
         <div
-          data-testid="star"
-          role="presentation"
+          aria-label="Ocena: 5. Na podstawie 100 głosów."
+          class="wrapper"
         >
-          <span
-            class="material-icons teal medium"
+          <div
+            data-testid="star"
+            role="presentation"
           >
-            star
-          </span>
+            <span
+              class="material-icons teal medium"
+            >
+              star
+            </span>
+          </div>
+          <div
+            data-testid="star"
+            role="presentation"
+          >
+            <span
+              class="material-icons teal medium"
+            >
+              star
+            </span>
+          </div>
+          <div
+            data-testid="star"
+            role="presentation"
+          >
+            <span
+              class="material-icons teal medium"
+            >
+              star
+            </span>
+          </div>
+          <div
+            data-testid="star"
+            role="presentation"
+          >
+            <span
+              class="material-icons teal medium"
+            >
+              star
+            </span>
+          </div>
+          <div
+            data-testid="star"
+            role="presentation"
+          >
+            <span
+              class="material-icons teal medium"
+            >
+              star
+            </span>
+          </div>
         </div>
-        <div
-          data-testid="star"
-          role="presentation"
+        <span
+          class="votes text_medium votes_medium"
         >
-          <span
-            class="material-icons teal medium"
-          >
-            star
-          </span>
-        </div>
-        <div
-          data-testid="star"
-          role="presentation"
-        >
-          <span
-            class="material-icons teal medium"
-          >
-            star
-          </span>
-        </div>
-        <div
-          data-testid="star"
-          role="presentation"
-        >
-          <span
-            class="material-icons teal medium"
-          >
-            star
-          </span>
-        </div>
-        <div
-          data-testid="star"
-          role="presentation"
-        >
-          <span
-            class="material-icons teal medium"
-          >
-            star
-          </span>
-        </div>
+          100
+        </span>
       </div>
     </div>
   </body>,
   "container": <div>
     <div
-      aria-label="Ocena: 5. Na podstawie 100 głosów."
-      class="container medium"
+      class="container container_medium"
       data-testid="star_rating"
     >
       <div
-        data-testid="star"
-        role="presentation"
+        aria-label="Ocena: 5. Na podstawie 100 głosów."
+        class="wrapper"
       >
-        <span
-          class="material-icons teal medium"
+        <div
+          data-testid="star"
+          role="presentation"
         >
-          star
-        </span>
+          <span
+            class="material-icons teal medium"
+          >
+            star
+          </span>
+        </div>
+        <div
+          data-testid="star"
+          role="presentation"
+        >
+          <span
+            class="material-icons teal medium"
+          >
+            star
+          </span>
+        </div>
+        <div
+          data-testid="star"
+          role="presentation"
+        >
+          <span
+            class="material-icons teal medium"
+          >
+            star
+          </span>
+        </div>
+        <div
+          data-testid="star"
+          role="presentation"
+        >
+          <span
+            class="material-icons teal medium"
+          >
+            star
+          </span>
+        </div>
+        <div
+          data-testid="star"
+          role="presentation"
+        >
+          <span
+            class="material-icons teal medium"
+          >
+            star
+          </span>
+        </div>
       </div>
-      <div
-        data-testid="star"
-        role="presentation"
+      <span
+        class="votes text_medium votes_medium"
       >
-        <span
-          class="material-icons teal medium"
-        >
-          star
-        </span>
-      </div>
-      <div
-        data-testid="star"
-        role="presentation"
-      >
-        <span
-          class="material-icons teal medium"
-        >
-          star
-        </span>
-      </div>
-      <div
-        data-testid="star"
-        role="presentation"
-      >
-        <span
-          class="material-icons teal medium"
-        >
-          star
-        </span>
-      </div>
-      <div
-        data-testid="star"
-        role="presentation"
-      >
-        <span
-          class="material-icons teal medium"
-        >
-          star
-        </span>
-      </div>
+        100
+      </span>
     </div>
   </div>,
   "debug": [Function],
