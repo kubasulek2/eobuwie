@@ -3,7 +3,7 @@ import Star from './Star';
 
 describe('snapshot', () => {
 	it('Matches the snapshot', () => {
-		// expect(render(<DayLabel weekDay={weekDay} when="today" value={day} />)).toMatchSnapshot();
+    expect(render(<Star />)).toMatchSnapshot();
 	});
 });
 

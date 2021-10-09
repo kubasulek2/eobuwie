@@ -12,5 +12,6 @@ export const gray_bg = "gray_bg";
 export const gray_light_bg = "gray_light_bg";
 export const white_bg = "white_bg";
 export const text_dark = "text_dark";
+export const text_medium_dark = "text_medium_dark";
 export const text_medium = "text_medium";
 export const text_white = "text_white";
