@@ -1,16 +1,13 @@
 import {VFC} from "react";
-import Star from "../../atoms/star/Star";
+import StarRating from "../../molecules/star_rating/StarRating";
+
 
 const App: VFC = () => {
   return (
     <div style={{display: "flex"}}>
-    <Star size="small" rating={1} />
-    <Star size="small" rating={1} />
-    <Star size="small" rating={1} />
-    <Star size="small" rating={1} />
-    <Star size="small" rating={0.5} />
+      <StarRating score={4.5} votes={100} size="medium" />
     </div>
   );
-}
+};
 
 export default App;

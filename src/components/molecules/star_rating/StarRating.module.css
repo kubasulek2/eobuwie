@@ -1,0 +1,38 @@
+.container {
+  display: flex;
+}
+
+.wrapper {
+  display: flex;
+}
+
+.container_small {
+  padding: 0.5rem 0;
+}
+
+.container_medium {
+  padding: 0.8rem 0;
+}
+
+.container_large {
+  padding: 1rem 0;
+}
+
+.votes {
+  font-weight: 400;
+  margin-left: 0.5rem;
+  letter-spacing: 0;
+  line-height: 1.1;
+}
+
+.votes_small {
+  font-size: 1rem;
+}
+
+.votes_medium {
+  font-size: 1.25rem;
+}
+
+.votes_large {
+  font-size: 1.5rem;
+}
