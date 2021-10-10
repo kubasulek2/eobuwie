@@ -1,0 +1,14 @@
+.card {
+  border: 1.5px solid #CECECE;
+  min-height: 40vh;
+  width: 100%;
+  padding: 1.6rem;
+  border-radius: 1px;
+}
+
+@media (min-width: 481px) {
+  .card {
+    width: auto;
+    min-width: 25rem;
+  }
+} 

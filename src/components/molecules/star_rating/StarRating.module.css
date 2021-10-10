@@ -7,20 +7,20 @@
 }
 
 .container_small {
-  padding: 0.5rem 0;
+  padding: 0.2rem 0;
 }
 
 .container_medium {
-  padding: 0.8rem 0;
+  padding: 0.5rem 0;
 }
 
 .container_large {
-  padding: 1rem 0;
+  padding: 0.8rem 0;
 }
 
 .votes {
   font-weight: 400;
-  margin-left: 0.5rem;
+  margin-left: 0.2rem;
   letter-spacing: 0;
   line-height: 1.1;
 }
