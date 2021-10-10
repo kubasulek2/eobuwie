@@ -10,7 +10,7 @@ Object {
         data-testid="star_rating"
       >
         <div
-          aria-label="Ocena: 5. Na podstawie 100 głosów."
+          aria-label="Rating: 5. Based on 100 votes."
           class="wrapper"
         >
           <div
@@ -78,7 +78,7 @@ Object {
       data-testid="star_rating"
     >
       <div
-        aria-label="Ocena: 5. Na podstawie 100 głosów."
+        aria-label="Rating: 5. Based on 100 votes."
         class="wrapper"
       >
         <div
