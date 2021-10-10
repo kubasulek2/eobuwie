@@ -129,6 +129,9 @@ img {
   white-space: nowrap;
   width: 1px;
 }
+.visually-hidden:focus {
+  margin: 1rem 0;  
+}
 
 /*********************** Root element styles ***********************/
 

@@ -1,12 +1,12 @@
-export type CalendarDate = Date | number; 
-export type ReservationCardProps = {
+import {CalendarDate} from "../../organisms/ReservationCard/types";
+
+export type DatePickerProps = {
   startDate: CalendarDate | null;
   endDate: CalendarDate | null;
   availableDates: (CalendarDate)[]
-  price: number;
-  score: number;
-  votes: number;
   setStartDate(start: CalendarDate): void
   setEndDate(end: CalendarDate): void
-  onSubmit(): void
+  onSubmit(): void;
+  id?: string;
+  classes?: string[];
 }

@@ -1,0 +1,4 @@
+/* Prevent displaying native pickers for keyboard navigation inputs */
+.hiddenInput::-webkit-inner-spin-button, .hiddenInput::-webkit-calendar-picker-indicator {
+  display: none;
+}

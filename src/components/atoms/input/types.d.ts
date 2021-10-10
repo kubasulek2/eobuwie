@@ -1,3 +1,5 @@
+import {HTMLProps} from "react";
+
 export type InputProps = {
   value: string;
   onChange(v: string): void;
@@ -5,4 +7,4 @@ export type InputProps = {
   placeholder?: string
   id?:string
   classes?:string[]
-}
+} & HTMLProps<HTMLInputElement>

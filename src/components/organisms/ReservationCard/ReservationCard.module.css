@@ -1,9 +1,14 @@
 .card {
   border: 1.5px solid #CECECE;
-  min-height: 40vh;
+  min-height: 20rem;
   width: 100%;
   padding: 1.6rem;
   border-radius: 1px;
+}
+
+.formControl {
+  padding-top: 1rem;
+  padding-bottom: 1.5rem;
 }
 
 @media (min-width: 481px) {

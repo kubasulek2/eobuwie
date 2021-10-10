@@ -7,9 +7,10 @@ import {text_medium} from "../../../styles/colors";
 /**
  * Text or date input. Controlled via props.
  */
-const Input: VFC<InputProps> = ({value, onChange, id, placeholder, type="text", classes=[]}) => {
+const Input: VFC<InputProps> = ({value, onChange, id, placeholder, type="text", classes=[], ...htmlProps}) => {
   return (
     <input
+      {...htmlProps}
       className={joinClassNames(styles.input, text_medium, ...classes)}
       value={value}
       onChange={e => onChange(e.target.value)}

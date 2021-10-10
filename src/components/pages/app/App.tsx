@@ -3,7 +3,6 @@ import styles from "./App.module.css";
 import {joinClassNames} from "../../../utils/joinClassNames";
 import {gray_light_bg} from "../../../styles/colors";
 import ReservationCard from "../../organisms/ReservationCard/ReservationCard";
-import Label from "../../atoms/label/Label";
 
 
 const App: VFC = () => {
@@ -16,14 +15,10 @@ const App: VFC = () => {
         availableDates={[11234]}
         startDate={null}
         endDate={null}
-        onDatesSelected={() => {}}
+        setEndDate={() => {}}
+        setStartDate={() => {}}
         onSubmit={() => {}}
       />
-      <Label idFor="test" title="Dates" />
-      <div>
-        <input type="text" name="abc" id="test" />
-
-      </div>
     </div>
   );
 };
