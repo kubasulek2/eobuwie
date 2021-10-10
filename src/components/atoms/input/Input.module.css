@@ -1,0 +1,23 @@
+.input {
+  border-radius: 2px;
+  background-color: transparent;
+  border: 1.5px solid #CECECE;
+  padding: .5rem 1rem;
+  width: 100%;
+  font-size: 1.1rem;
+}
+
+/* Prevent displaying native pickers for keyboard navigation inputs */
+
+.hiddenInput::-webkit-inner-spin-button, .hiddenInput::-webkit-calendar-picker-indicator {
+  display: none;
+}
+
+.input:focus {
+  outline: none;
+  border: 2px solid #00DBB1;
+}
+
+.input::placeholder {
+  color: #A1A1A1;
+}
