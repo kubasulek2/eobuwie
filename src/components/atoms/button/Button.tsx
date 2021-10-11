@@ -1,4 +1,4 @@
-import React, {FC} from 'react';
+import {FC} from 'react';
 import {joinClassNames} from "../../../utils/joinClassNames";
 import {ButtonProps} from "./types";
 import styles from "./Button.module.css";
@@ -6,13 +6,17 @@ import styles from "./Button.module.css";
 /**
  * Button component. Warm red color by default. Can be overritten via "classes" prop.
  */
-const Button: FC<ButtonProps> = ({children, id, onClick, type = "button", size = "medium", classes = []}) => {
+const Button: FC<ButtonProps> = ({children, id, onClick, type = "button", size = "medium", classes = [], disabled, ...htmlProps}) => {
   return (
     <button
-      className={joinClassNames(styles.button, styles[size], ...classes)}
+      {...htmlProps}
+      /* Do not add disabled atribute due to accessibility reasons, make it class instead */
+      className={joinClassNames(styles.button, styles[size], (disabled ? styles.disabled : ""),  ...classes)}
+      /* Make sure if disabled is on, aria-disabled is set */
+      aria-disabled={Boolean(disabled)}
       id={id}
       type={type}
-      onClick={onClick}
+      onClick={!disabled ? onClick : undefined}
     >
       {children}
     </button>

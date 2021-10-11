@@ -33,4 +33,17 @@ it('Calls onClick callback', () => {
   expect(onClick).toBeCalledTimes(1);
 });
 
+it('Has aria-disabled attribute', () => {
+  render(<Button onClick={onClick} disabled>test</Button>);
+  const button = screen.getByRole('button');
+  expect(button).toHaveAttribute('aria-disabled', 'true');
+});
+
+it('Does not Call onClick callback, when disabled', () => {
+  render(<Button onClick={onClick} disabled>test</Button>);
+  const button = screen.getByRole('button');
+  userEvent.click(button);
+  expect(onClick).not.toBeCalled();
+});
+
 

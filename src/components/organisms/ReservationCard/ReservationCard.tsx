@@ -28,7 +28,7 @@ const ReservationCard: VFC<ReservationCardProps> = ({price, score, votes, onSubm
           <Input id="dummy2" placeholder="Dummy content 2" value="" onChange={() => {}} />
         </div>
         <div className={styles.formControl}>
-          <Button type="submit" size="medium">Submit</Button>
+          <Button type="submit" size="medium" onClick={() => {}}>Submit</Button>
         </div>
       </form>
     </div>

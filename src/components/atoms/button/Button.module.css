@@ -30,3 +30,7 @@
   font-size: 1.8rem;
   padding: 0.8rem 1.4rem;
 }
+
+.disabled {
+  cursor: no-drop;
+}
