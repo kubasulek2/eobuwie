@@ -7,8 +7,15 @@
 }
 
 .formControl {
-  padding-top: 1rem;
-  padding-bottom: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.formControl:last-child {
+  margin-bottom: 4rem;
+}
+
+.formControl:nth-last-child(2) {
+  margin-bottom: 2rem;
 }
 
 @media (min-width: 481px) {
@@ -16,4 +23,4 @@
     width: auto;
     min-width: 25rem;
   }
-} 
+}
