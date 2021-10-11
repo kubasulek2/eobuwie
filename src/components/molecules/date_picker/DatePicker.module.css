@@ -1,4 +1,58 @@
-/* Prevent displaying native pickers for keyboard navigation inputs */
-.hiddenInput::-webkit-inner-spin-button, .hiddenInput::-webkit-calendar-picker-indicator {
-  display: none;
+/* Picker button */
+
+.picker {
+  border-radius: 2px;
+  background-color: transparent;
+  border: 1.5px solid #CECECE;
+  padding: .5rem;
+  width: 100%;
+  font-size: 1.1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.picker:focus, picker:active {
+  outline: none;
+  border: 2px solid #00DBB1;
+}
+
+.picker-placeholder {
+  color: #A1A1A1;
+}
+
+/* End and start date subbuttons */
+.date {
+  display: block;
+  text-align: left;
+  padding-left: .4rem;
+  flex-grow: 1;
+  border-radius: 4px;
+}
+
+/* Arrow icon */
+
+.arrow {
+  flex-grow: 0;
+  display: block;
+  position: relative;
+  width: 25px;
+  margin: 0 0.6rem;
+  height: 1.5px;
+  background-color: #464646;
+}
+
+.arrow::after {
+  content: "";
+  position: absolute;
+  display: block;
+  border-color: #464646;
+  border-width: 1.5px;
+  border-top-style: solid;
+  border-right-style: solid;
+  width: 10px;
+  height: 10px;
+  transform: rotate(45deg);
+  right: 1px;
+  top: -4.5px;
 }

@@ -1,29 +1,18 @@
-import React, {VFC} from 'react';
-import Input from "../../atoms/input/Input";
+import {VFC} from 'react';
 import {DatePickerProps} from "./types";
+import styles from './DatePicker.module.css';
 
-const DatePicker: VFC<DatePickerProps> = ({}) => {
+const DatePicker: VFC<DatePickerProps> = ({startDate, endDate}) => {
   return (
     <>
-      <Input 
-        placeholder="Check In" 
-        value="" 
-        type="date" 
-        onChange={() => {}} 
-        classes={['visually-hidden']}
-        aria-label="Check In Date" 
-        />
-      <Input 
-        placeholder="Check Out" 
-        value="" 
-        type="date" 
-        onChange={() => {}} 
-        classes={['visually-hidden']} 
-        aria-label="Check Out Date" 
-      />
-      
+      <button className={styles.picker}>
+        <span className={styles.date}>{startDate ? "12.02.2020" : "Check In"}</span>
+        <span className={styles.arrow}></span>
+        <span className={styles.date}>{endDate ? "16.02.2020" : "Check Out"}</span>
+      </button>
+
     </>
   );
-}
+};
 
 export default DatePicker;

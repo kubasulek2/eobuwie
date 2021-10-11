@@ -6,7 +6,11 @@ export type DatePickerProps = {
   availableDates: (CalendarDate)[]
   setStartDate(start: CalendarDate): void
   setEndDate(end: CalendarDate): void
-  onSubmit(): void;
   id?: string;
   classes?: string[];
+}
+export type DatePickerButtonProps = {
+  startDate: CalendarDate | null;
+  endDate: CalendarDate | null;
+  onClick(): void; 
 }
