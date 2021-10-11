@@ -18,6 +18,18 @@
   margin-bottom: 2rem;
 }
 
+.errMsg {
+  margin: 1rem 0;
+  font-size: 0.8rem;
+  min-height: 1rem;
+  visibility: hidden;
+  color: #f44336
+}
+
+.error {
+  visibility: visible;
+}
+
 @media (min-width: 481px) {
   .card {
     width: auto;
