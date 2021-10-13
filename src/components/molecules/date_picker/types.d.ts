@@ -9,8 +9,9 @@ export type DatePickerProps = {
   id?: string;
   classes?: string[];
 }
-export type DatePickerButtonProps = {
-  startDate: CalendarDate | null;
-  endDate: CalendarDate | null;
-  onClick(): void; 
+export type DatePickerModalProps = {
+  open: boolean;
+  id: string;
+  availableDates: (CalendarDate)[]
+  onDates(start: CalendarDate, end: CalendarDate): void; 
 }

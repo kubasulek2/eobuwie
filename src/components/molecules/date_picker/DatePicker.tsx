@@ -1,16 +1,19 @@
-import {useState, VFC} from 'react';
+import {useMemo, useState, VFC} from 'react';
 import {DatePickerProps} from "./types";
 import styles from './DatePicker.module.css';
 import {joinClassNames} from "../../../utils/joinClassNames";
 import {text_medium_dark, teal_light_bg, teal} from "../../../styles/colors";
 import format from "date-fns/format";
 import {usePickerKeyboardControl} from "../../../hooks/usePickerKeyboardControl";
+import DatePickerModal from "./DatePickerModal";
 
-const DatePicker: VFC<DatePickerProps> = ({startDate, endDate, id}) => {
+const DatePicker: VFC<DatePickerProps> = ({startDate, endDate, id, availableDates}) => {
   /* Handles picker state */
   const [pickerOpen, setPickerOpen] = useState<boolean>(false);
 
   const pickerId = id || "reservation_date_picker";
+  // use memoization for modalId, to prevent useEffect extensive calls;
+  const modalId = useMemo(() => id ? id + "_modal" : "reservation_date_picker_modal", [id]);
 
   /* Dates formated to string */
   const startDateString = startDate ? format(startDate, "dd/MM/yyyy") : "Check In";
@@ -22,13 +25,13 @@ const DatePicker: VFC<DatePickerProps> = ({startDate, endDate, id}) => {
 
 
   // Handles focus, and keyboard control
-  usePickerKeyboardControl(pickerOpen, setPickerOpen, pickerId + "_modal");
+  usePickerKeyboardControl(pickerOpen, setPickerOpen, modalId);
 
   return (
-    <div data-testid="date_picker" id={pickerId}>
+    <div data-testid="date_picker" id={pickerId} className={styles.wrapper}>
       <button
         onClick={() => setPickerOpen(prev => !prev)}
-        className={joinClassNames(styles.picker, text_medium_dark)}
+        className={joinClassNames(styles.picker, text_medium_dark, pickerOpen ? styles["modal-open"] : "")}
         aria-controls={pickerId + "_dialog"}
         aria-haspopup="true"
         aria-label="Controls reservation datepicker"
@@ -39,20 +42,13 @@ const DatePicker: VFC<DatePickerProps> = ({startDate, endDate, id}) => {
         <span className={endDateClasses}>{endDateString}</span>
       </button>
       <span className="visually-hidden" id={pickerId + "_info"}>This button opens popup dialog, where reservation dates can be chosen.</span>
-      <div
-        id={pickerId + "_modal"}
-        hidden={!pickerOpen}
-        aria-hidden={pickerOpen ? "false" : "true"}
-        aria-modal={pickerOpen ? "true" : "false"}
-        role="dialog"
-        aria-label="Choose reservation dates"
-      >
-        <ul>
-          <li tabIndex={0}>test 1</li>
-          <li tabIndex={0}>test 2</li>
-          <li tabIndex={0}>test 3</li>
-        </ul>
-      </div>
+
+      <DatePickerModal
+        open={pickerOpen}
+        availableDates={availableDates}
+        id={modalId}
+        onDates={() => {}}
+      />
     </div>
   );
 };
