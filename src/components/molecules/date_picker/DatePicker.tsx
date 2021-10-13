@@ -4,6 +4,7 @@ import styles from './DatePicker.module.css';
 import {joinClassNames} from "../../../utils/joinClassNames";
 import {text_medium_dark, teal_light_bg, teal} from "../../../styles/colors";
 import format from "date-fns/format";
+import {usePickerKeyboardControl} from "../../../hooks/usePickerKeyboardControl";
 
 const DatePicker: VFC<DatePickerProps> = ({startDate, endDate, id}) => {
   /* Handles picker state */
@@ -18,6 +19,10 @@ const DatePicker: VFC<DatePickerProps> = ({startDate, endDate, id}) => {
   /* Concatenated classes of dates buttons */
   const startDateClasses = (pickerOpen || startDate) ? joinClassNames(styles.date, teal, teal_light_bg) : styles.date;
   const endDateClasses = endDate ? joinClassNames(styles.date, teal, teal_light_bg) : styles.date;
+
+
+  // Handles focus, and keyboard control
+  usePickerKeyboardControl(pickerOpen, setPickerOpen, pickerId + "_modal");
 
   return (
     <div data-testid="date_picker" id={pickerId}>
@@ -35,12 +40,19 @@ const DatePicker: VFC<DatePickerProps> = ({startDate, endDate, id}) => {
       </button>
       <span className="visually-hidden" id={pickerId + "_info"}>This button opens popup dialog, where reservation dates can be chosen.</span>
       <div
+        id={pickerId + "_modal"}
         hidden={!pickerOpen}
         aria-hidden={pickerOpen ? "false" : "true"}
         aria-modal={pickerOpen ? "true" : "false"}
         role="dialog"
         aria-label="Choose reservation dates"
-      >test</div>
+      >
+        <ul>
+          <li tabIndex={0}>test 1</li>
+          <li tabIndex={0}>test 2</li>
+          <li tabIndex={0}>test 3</li>
+        </ul>
+      </div>
     </div>
   );
 };
