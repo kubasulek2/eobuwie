@@ -35,11 +35,12 @@ const DatePicker: VFC<DatePickerProps> = ({startDate, endDate, id}) => {
       </button>
       <span className="visually-hidden" id={pickerId + "_info"}>This button opens popup dialog, where reservation dates can be chosen.</span>
       <div
+        hidden={!pickerOpen}
         aria-hidden={pickerOpen ? "false" : "true"}
         aria-modal={pickerOpen ? "true" : "false"}
         role="dialog"
         aria-label="Choose reservation dates"
-      ></div>
+      >test</div>
     </div>
   );
 };
