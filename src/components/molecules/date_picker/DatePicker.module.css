@@ -2,9 +2,10 @@
 
 .picker {
   border-radius: 2px;
+  cursor: pointer;
   background-color: transparent;
-  border: 1.5px solid #CECECE;
-  padding: .5rem;
+  border: 2px solid #CECECE;
+  padding: .4rem .5rem;
   width: 100%;
   font-size: 1.1rem;
   display: flex;
@@ -25,10 +26,11 @@
 .date {
   display: block;
   text-align: left;
-  padding-left: .4rem;
+  padding: .1rem 0 .1rem .4rem;
   flex-grow: 1;
   border-radius: 4px;
 }
+
 
 /* Arrow icon */
 
