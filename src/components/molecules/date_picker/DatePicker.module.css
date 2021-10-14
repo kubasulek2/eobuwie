@@ -84,6 +84,8 @@
   position: absolute;
   top: 3rem;
   left: 0;
+  z-index: 2;
+  overflow: hidden;
   background-color: #fff;
   width: 100%;
   max-width: 400px;
@@ -162,4 +164,15 @@
 
 .month_arrow_btn:focus, .month_arrow_btn:active {
   border-color: #66e9d0
+}
+
+.week_names {
+  display: flex;
+}
+.calendar_row {
+  display: flex;
+}
+
+.calendar_cell {
+  margin: .4rem;
 }

@@ -72,15 +72,27 @@ const DatePickerModal: VFC<DatePickerModalProps> = ({open, id, availableDates, o
           </button>
         </div>
         <div role="grid">
-          <div role="row">
+          <div role="row" className={styles.week_names}>
             {DAYS_OF_WEEK.map(day => (
               <div key={day} role="columnheader">{day}</div>
             ))}
           </div>
           {calendarRows.map((index) => (
-            <div role="row" key={"row_" + index}>
-              {monthDays.filter((el, i) => i < (index + 1) * 7).map(el => (
-                <div role="gridcell" key={el.dateString}>{el.dateString}</div>
+            <div
+              role="row"
+              key={"row_" + index}
+              className={styles.calendar_row}
+            >
+              {monthDays.filter((el, i) => i < ((index + 1) * 7) && i >= index * 7).map(el => (
+                <div
+                  role="gridcell"
+                  tabIndex={0}
+                  data-date={el.dateString}
+                  key={el.dateString}
+                  className={styles.calendar_cell}
+                >
+                  {el.dateString}
+                </div>
               ))}
             </div>
           ))}
