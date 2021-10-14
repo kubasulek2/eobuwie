@@ -31,7 +31,7 @@ const DatePicker: VFC<DatePickerProps> = ({startDate, endDate, id, availableDate
     <div data-testid="date_picker" id={pickerId} className={styles.wrapper}>
       <button
         onClick={() => setPickerOpen(prev => !prev)}
-        className={joinClassNames(styles.picker, text_medium_dark, pickerOpen ? styles["modal-open"] : "")}
+        className={joinClassNames(styles.picker, text_medium_dark, pickerOpen ? styles.modal_open : "")}
         aria-controls={pickerId + "_dialog"}
         aria-haspopup="true"
         aria-label="Controls reservation datepicker"

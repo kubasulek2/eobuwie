@@ -10,10 +10,15 @@
   width: 100%;
   cursor: pointer;
   letter-spacing: .25px;
+  border: 2px solid #c25956;
 }
 
-.button:hover, .button:active {
+.button:hover {
   background-color: #ac4f4c;
+}
+
+.button:active, .button:focus {
+  border-color: #ac4f4c;
 }
 
 .small {
