@@ -10,3 +10,11 @@ export type ReservationCardProps = {
   setEndDate(end: CalendarDate): void
   onSubmit(): void
 }
+
+type MonthDay = {
+  date: CalendarDate;
+  available: boolean;
+  today: boolean;
+  weekDay: 0 | 1 | 2 | 3 | 4 | 5 | 6;
+  dateString: string;
+}

@@ -20,7 +20,7 @@ const StarRating: VFC<StarRatingProps> = ({score, votes, id, size = "medium"}) =
         className={styles.wrapper}
         aria-label={`Rating: ${ score }. Based on ${ votes } votes.`}
       >
-        {[1, 2, 3, 4, 5].map(num => <Star rating={scoreToStarValue(score, num)} size={size} />)}
+        {[1, 2, 3, 4, 5].map(num => <Star rating={scoreToStarValue(score, num)} size={size} key={num} />)}
       </div>
       <span className={joinClassNames(styles.votes, text_medium, styles["votes_" + size])}>{votes}</span>
     </div>
