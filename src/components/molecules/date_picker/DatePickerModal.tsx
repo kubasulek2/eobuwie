@@ -4,7 +4,7 @@ import addMonths from "date-fns/addMonths";
 import {DatePickerModalProps} from "./types";
 import styles from './DatePicker.module.css';
 import {joinClassNames} from "../../../utils/joinClassNames";
-import {text_medium_dark, cyan_bg, text_white} from "../../../styles/colors";
+import {text_medium_dark, cyan_bg, text_white, text_medium} from "../../../styles/colors";
 import {MonthDay} from "../../organisms/ReservationCard/types";
 import {getCalendarMonthBoundries} from "../../../utils/getCalendarMonthBoundries";
 import {usePrevious} from "../../../hooks/usePrevious";
@@ -71,10 +71,16 @@ const DatePickerModal: VFC<DatePickerModalProps> = ({open, id, availableDates, o
 
           </button>
         </div>
-        <div role="grid">
+        <div role="grid" className={styles.calendar_container}>
           <div role="row" className={styles.week_names}>
             {DAYS_OF_WEEK.map(day => (
-              <div key={day} role="columnheader">{day}</div>
+              <div 
+              key={day} 
+              role="columnheader"
+              className={joinClassNames(text_medium, styles.week_day)} 
+              >
+                {day}
+              </div>
             ))}
           </div>
           {calendarRows.map((index) => (
@@ -85,7 +91,9 @@ const DatePickerModal: VFC<DatePickerModalProps> = ({open, id, availableDates, o
             >
               {monthDays.filter((el, i) => i < ((index + 1) * 7) && i >= index * 7).map(el => (
                 <div
+                  onClick={() => {}}
                   role="gridcell"
+                  aria-label={`You choose ${el.dateString}`}
                   tabIndex={0}
                   data-date={el.dateString}
                   key={el.dateString}

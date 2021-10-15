@@ -105,7 +105,11 @@ img {
 }
 
 .text_medium {
-  color: #666;
+  color: #777;
+}
+
+.text_medium_light {
+  color: #888;
 }
 
 .text_white {

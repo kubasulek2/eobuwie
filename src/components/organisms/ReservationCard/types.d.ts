@@ -12,7 +12,7 @@ export type ReservationCardProps = {
 }
 
 type MonthDay = {
-  date: CalendarDate;
+  timeStamp: number;
   available: boolean;
   today: boolean;
   weekDay: 0 | 1 | 2 | 3 | 4 | 5 | 6;

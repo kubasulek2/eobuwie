@@ -22,7 +22,7 @@ export function computeCalendarDays (
   const daysDiff = differenceInCalendarDays(endDate, startDate);
 
   // for performance reasons filter available dates now, rather than check it each time in a loop
-  availableDates = availableDates.filter(d => isSameMonth(d,selectedDate));
+  availableDates = availableDates.filter(d => isSameMonth(d, selectedDate));
 
   const days: MonthDay[] = [];
 
@@ -33,7 +33,7 @@ export function computeCalendarDays (
       available: availableDates.some(d => isSameDay(d, currentDay)),
       weekDay: getDay(currentDay),
       today: isToday(currentDay),
-      date: currentDay,
+      timeStamp: currentDay.getTime(),
       dateString: format(currentDay, "dd/MM/yyyy")
     });
   }

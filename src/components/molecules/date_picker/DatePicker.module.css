@@ -166,8 +166,20 @@
   border-color: #66e9d0
 }
 
+/* Calendar Grid */
+.calendar_container {
+  padding: 0.5rem 1rem; 
+}
+
 .week_names {
   display: flex;
+  padding: 0.5rem 0;
+}
+
+.week_day {
+  font-size: .85rem;
+  text-align: center;
+  flex: 1 0 auto;
 }
 .calendar_row {
   display: flex;
@@ -175,4 +187,5 @@
 
 .calendar_cell {
   margin: .4rem;
+  flex: 1 0 auto;
 }
