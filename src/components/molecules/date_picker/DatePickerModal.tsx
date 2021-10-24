@@ -1,27 +1,34 @@
-import {useEffect, useState, VFC} from "react";
+import { useEffect, useState, VFC } from "react";
 import format from "date-fns/format";
 import addMonths from "date-fns/addMonths";
-import {DatePickerModalProps} from "./types";
-import styles from './DatePicker.module.css';
-import {joinClassNames} from "../../../utils/joinClassNames";
-import {text_medium_dark, cyan_bg, text_white, text_medium} from "../../../styles/colors";
-import {MonthDay} from "../../organisms/ReservationCard/types";
-import {getCalendarMonthBoundries} from "../../../utils/getCalendarMonthBoundries";
-import {usePrevious} from "../../../hooks/usePrevious";
-import {computeCalendarDays} from "../../../utils/computeCalendarDays";
+import { DatePickerModalProps } from "./types";
+import styles from "./DatePicker.module.css";
+import { joinClassNames } from "../../../utils/joinClassNames";
+import {
+  text_medium_dark,
+  cyan_bg,
+  text_white,
+  text_medium,
+} from "../../../styles/colors";
+import { MonthDay } from "../../organisms/ReservationCard/types";
+import { getCalendarMonthBoundries } from "../../../utils/getCalendarMonthBoundries";
+import { usePrevious } from "../../../hooks/usePrevious";
+import { computeCalendarDays } from "../../../utils/computeCalendarDays";
 
 /**
  */
 const DAYS_OF_WEEK = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
-
-
-
 /**
- * Displays calendar popup. 
+ * Displays calendar popup.
  * Do most of the dates calculations.
  */
-const DatePickerModal: VFC<DatePickerModalProps> = ({open, id, availableDates, onDates}) => {
+const DatePickerModal: VFC<DatePickerModalProps> = ({
+  open,
+  id,
+  availableDates,
+  onDates,
+}) => {
   /* Date for calendar manipulation */
   const [date, setDate] = useState<Date>(new Date());
   const [monthDays, setMonthDays] = useState<MonthDay[]>([]);
@@ -29,7 +36,6 @@ const DatePickerModal: VFC<DatePickerModalProps> = ({open, id, availableDates, o
   // Use previous Date because availableDates array may be not memoized, causing constant component rerenders.
   // Using prevDate will prevent hook belowe from recalculating monthDays all the time
   const prevDate = usePrevious<Date>(date);
-
 
   // Compute month days on each calendar date change
   useEffect(() => {
@@ -45,7 +51,10 @@ const DatePickerModal: VFC<DatePickerModalProps> = ({open, id, availableDates, o
   }, [date, prevDate, open, availableDates, setMonthDays, monthDays]);
 
   // Calculates number of weeks in month view. This will serve as rows in our calendar.
-  const calendarRows = Array.from({length: monthDays.length / 7}, (_, i) => i);
+  const calendarRows = Array.from(
+    { length: monthDays.length / 7 },
+    (_, i) => i
+  );
 
   return (
     <div
@@ -57,27 +66,47 @@ const DatePickerModal: VFC<DatePickerModalProps> = ({open, id, availableDates, o
       aria-label="Choose reservation dates"
       id={id}
     >
-      <div
-
-      >
-        <div className={joinClassNames(styles.modal_header, cyan_bg, text_white)}>
-          <button className={styles.month_arrow_btn} onClick={() => setDate(prev => addMonths(prev, -1))}>
-            <span className={joinClassNames(text_medium_dark, styles.month_arrow, styles.month_arrow_left)}></span>
-
+      <div>
+        <div
+          className={joinClassNames(styles.modal_header, cyan_bg, text_white)}
+        >
+          <button
+            data-column={0}
+            className={styles.month_arrow_btn}
+            onClick={() => setDate((prev) => addMonths(prev, -1))}
+          >
+            <span
+              className={joinClassNames(
+                text_medium_dark,
+                styles.month_arrow,
+                styles.month_arrow_left
+              )}
+            ></span>
           </button>
-          <div className={styles.month}>{format(date, "LLLL")} {date.getFullYear()}</div>
-          <button className={styles.month_arrow_btn} onClick={() => setDate(prev => addMonths(prev, 1))}>
-            <span className={joinClassNames(text_medium_dark, styles.month_arrow, styles.month_arrow_right)}></span>
-
+          <div className={styles.month}>
+            {format(date, "LLLL")} {date.getFullYear()}
+          </div>
+          <button
+            data-column={6}
+            className={styles.month_arrow_btn}
+            onClick={() => setDate((prev) => addMonths(prev, 1))}
+          >
+            <span
+              className={joinClassNames(
+                text_medium_dark,
+                styles.month_arrow,
+                styles.month_arrow_right
+              )}
+            ></span>
           </button>
         </div>
         <div role="grid" className={styles.calendar_container}>
           <div role="row" className={styles.week_names}>
-            {DAYS_OF_WEEK.map(day => (
-              <div 
-              key={day} 
-              role="columnheader"
-              className={joinClassNames(text_medium, styles.week_day)} 
+            {DAYS_OF_WEEK.map((day) => (
+              <div
+                key={day}
+                role="columnheader"
+                className={joinClassNames(text_medium, styles.week_day)}
               >
                 {day}
               </div>
@@ -89,24 +118,27 @@ const DatePickerModal: VFC<DatePickerModalProps> = ({open, id, availableDates, o
               key={"row_" + index}
               className={styles.calendar_row}
             >
-              {monthDays.filter((el, i) => i < ((index + 1) * 7) && i >= index * 7).map(el => (
-                <div
-                  onClick={() => {}}
-                  role="gridcell"
-                  aria-label={`You choose ${el.dateString}`}
-                  tabIndex={0}
-                  data-date={el.dateString}
-                  key={el.dateString}
-                  className={styles.calendar_cell}
-                >
-                  {el.dateString}
-                </div>
-              ))}
+              {monthDays
+                .filter((el, i) => i < (index + 1) * 7 && i >= index * 7)
+                .map((el, i) => (
+                  <div
+                    onClick={() => {}}
+                    role="gridcell"
+                    data-column={i}
+                    aria-label={`You choose ${el.dateString}`}
+                    tabIndex={0}
+                    data-date={el.dateString}
+                    key={el.dateString}
+                    className={styles.calendar_cell}
+                  >
+                    {el.dateString}
+                  </div>
+                ))}
             </div>
           ))}
         </div>
       </div>
-    </div >
+    </div>
   );
 };
 
