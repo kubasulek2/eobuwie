@@ -7,7 +7,6 @@ import isSameDay from 'date-fns/isSameDay';
 import isSameMonth from 'date-fns/isSameMonth';
 import format from "date-fns/format";
 import {CalendarDate, MonthDay} from "../components/organisms/ReservationCard/types";
-import { isPast } from 'date-fns';
 
 /**
  * Function takes two dates as Date objects or timestamps and returns array of formatted MonthDay objects.
@@ -35,6 +34,7 @@ export function computeCalendarDays (
       weekDay: getDay(currentDay),
       today: isToday(currentDay),
       timeStamp: currentDay.getTime(),
+      monthDay: currentDay.getDate(),
       dateString: format(currentDay, "dd/MM/yyyy")
     });
   }

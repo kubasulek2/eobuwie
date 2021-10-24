@@ -16,5 +16,6 @@ type MonthDay = {
   available: boolean;
   today: boolean;
   weekDay: 0 | 1 | 2 | 3 | 4 | 5 | 6;
+  monthDay: number;
   dateString: string;
 }

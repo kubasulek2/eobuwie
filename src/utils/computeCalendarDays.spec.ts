@@ -33,7 +33,7 @@ it('Works for single day only', () => {
   const days = computeCalendarDays(startDate, startDate, availableDates);
 
   expect(days).toHaveLength(1);
-  expect(days[0].date).toEqual(startDate);
+  expect(days[0].timeStamp).toEqual(startDate.getTime());
 
 });
 
