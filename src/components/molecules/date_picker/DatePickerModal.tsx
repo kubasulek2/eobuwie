@@ -131,7 +131,7 @@ const DatePickerModal: VFC<DatePickerModalProps> = ({
                     key={el.dateString}
                     className={styles.calendar_cell}
                   >
-                    {el.dateString}
+                    {el.monthDay}
                   </div>
                 ))}
             </div>
