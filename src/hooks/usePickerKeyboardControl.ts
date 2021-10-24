@@ -75,14 +75,14 @@ export function usePickerKeyboardControl(
         return;
       }
 
-      // Handle up and down arrows here
+      // Handle up and down arrows here.
+      // Will only work if elements are groupped in columns via data-column attribute
       if (!hasColumns) return;
 
       if (e.key === "ArrowUp" || e.key === "ArrowDown") {
         // remember key
         const keyDown = e.key === "ArrowDown";
         // get current column
-        console.log(document.activeElement);
         const colNum = (document.activeElement as HTMLElement).dataset.column;
         // when not in column yet, focus first or last element, depending on key pressed
         if (!colNum) {
@@ -94,7 +94,7 @@ export function usePickerKeyboardControl(
         const colElements: HTMLElement[] = Array.from(
           document.querySelectorAll(`[data-column="${colNum}"`)
         );
-        console.log(colElements);
+        
         // return if column elements not found
         if (!colElements.length) return;
 
@@ -132,10 +132,14 @@ export function usePickerKeyboardControl(
     // open first focusable element and store currently focused
     const picker = document.getElementById(id);
     if (pickerOpen && picker && !lastActiveElement) {
+      // save last focused element
       setLastActiveElement(document.activeElement);
 
+      // focus first element in the picker
       const firstFocusableEl = findFocusableElements(picker)[0];
       if (firstFocusableEl) firstFocusableEl.focus();
+
+      // restore privious focus on picker close
     } else if (!pickerOpen && lastActiveElement) {
       (lastActiveElement as HTMLElement).focus();
       setLastActiveElement(null);

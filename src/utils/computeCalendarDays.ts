@@ -7,6 +7,7 @@ import isSameDay from 'date-fns/isSameDay';
 import isSameMonth from 'date-fns/isSameMonth';
 import format from "date-fns/format";
 import {CalendarDate, MonthDay} from "../components/organisms/ReservationCard/types";
+import { isPast } from 'date-fns';
 
 /**
  * Function takes two dates as Date objects or timestamps and returns array of formatted MonthDay objects.
@@ -20,17 +21,17 @@ export function computeCalendarDays (
 
   if (isBefore(endDate, startDate)) throw new TypeError('End date must not be before start date');
   const daysDiff = differenceInCalendarDays(endDate, startDate);
+  const today = new Date();
 
   // for performance reasons filter available dates now, rather than check it each time in a loop
   availableDates = availableDates.filter(d => isSameMonth(d, selectedDate));
 
   const days: MonthDay[] = [];
-
   for (let i = 0; i <= daysDiff; i++) {
     const currentDay = addDays(startDate, i);
-
+    const notPast = differenceInCalendarDays(currentDay,today) >= 0;
     days.push({
-      available: availableDates.some(d => isSameDay(d, currentDay)),
+      available: notPast && availableDates.some(d => isSameDay(d, currentDay)),
       weekDay: getDay(currentDay),
       today: isToday(currentDay),
       timeStamp: currentDay.getTime(),
