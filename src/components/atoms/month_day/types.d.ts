@@ -5,7 +5,7 @@ export type MonthDayProps = {
     available: boolean;
     column: number;
     selected: boolean;
-    first: boolean;
-    last: boolean;
+    firstSelected: boolean;
+    lastSelected: boolean;
     onClick: (timeStamp: number) => void;
 }

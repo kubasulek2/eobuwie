@@ -3,7 +3,6 @@ import {MonthDayProps} from "./types";
 import styles from './MonthDay.module.css';
 
 const MonthDay: VFC<MonthDayProps> = ({dateString, timeStamp, monthDay, column, available, onClick}) => {
-  const 
 
   return (
     <div
