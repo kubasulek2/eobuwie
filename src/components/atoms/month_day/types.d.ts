@@ -3,6 +3,7 @@ export type MonthDayProps = {
     dateString: string;
     timeStamp: number;
     available: boolean;
+    today: boolean;
     column: number;
     selected: boolean;
     firstSelected: boolean;

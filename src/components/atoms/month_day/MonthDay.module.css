@@ -1,7 +1,20 @@
+.container {
+	flex: 1, 0, auto;
+}
+
 .wrapper {}
 
 .day {}
 
-.available {}
+
+/* Utility classes */
 
 .today {}
+
+.available {}
+
+.selected {}
+
+.selected.first {}
+
+.selected.last {}
