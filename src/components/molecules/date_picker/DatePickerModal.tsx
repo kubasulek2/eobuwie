@@ -1,19 +1,21 @@
-import { useEffect, useState, VFC } from "react";
+import {useEffect, useState, VFC} from "react";
 import format from "date-fns/format";
 import addMonths from "date-fns/addMonths";
-import { DatePickerModalProps } from "./types";
+import {DatePickerModalProps} from "./types";
 import styles from "./DatePicker.module.css";
-import { joinClassNames } from "../../../utils/joinClassNames";
+import {joinClassNames} from "../../../utils/joinClassNames";
 import {
+  text_medium_light,
   text_medium_dark,
   cyan_bg,
   text_white,
-  text_medium,
 } from "../../../styles/colors";
-import { MonthDay } from "../../organisms/ReservationCard/types";
-import { getCalendarMonthBoundries } from "../../../utils/getCalendarMonthBoundries";
-import { usePrevious } from "../../../hooks/usePrevious";
-import { computeCalendarDays } from "../../../utils/computeCalendarDays";
+import {IMonthDay} from "../../organisms/ReservationCard/types";
+import {getCalendarMonthBoundries} from "../../../utils/getCalendarMonthBoundries";
+import {usePrevious} from "../../../hooks/usePrevious";
+import {computeCalendarDays} from "../../../utils/computeCalendarDays";
+import MonthDay from "../../atoms/month_day/MonthDay";
+
 
 /**
  */
@@ -26,12 +28,12 @@ const DAYS_OF_WEEK = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 const DatePickerModal: VFC<DatePickerModalProps> = ({
   open,
   id,
-  availableDates,
+  unavailableDates,
   onDates,
 }) => {
   /* Date for calendar manipulation */
   const [date, setDate] = useState<Date>(new Date());
-  const [monthDays, setMonthDays] = useState<MonthDay[]>([]);
+  const [monthDays, setMonthDays] = useState<IMonthDay[]>([]);
 
   // Use previous Date because availableDates array may be not memoized, causing constant component rerenders.
   // Using prevDate will prevent hook belowe from recalculating monthDays all the time
@@ -47,14 +49,15 @@ const DatePickerModal: VFC<DatePickerModalProps> = ({
     const [start, end] = getCalendarMonthBoundries(date);
 
     // calculate and set MonthDay object's array
-    setMonthDays(computeCalendarDays(start, end, availableDates, date));
-  }, [date, prevDate, open, availableDates, setMonthDays, monthDays]);
+    setMonthDays(computeCalendarDays(start, end, unavailableDates, date));
+  }, [date, prevDate, open, unavailableDates, setMonthDays, monthDays]);
 
   // Calculates number of weeks in month view. This will serve as rows in our calendar.
   const calendarRows = Array.from(
-    { length: monthDays.length / 7 },
+    {length: monthDays.length / 7},
     (_, i) => i
   );
+  console.log(monthDays);
 
   return (
     <div
@@ -106,7 +109,7 @@ const DatePickerModal: VFC<DatePickerModalProps> = ({
               <div
                 key={day}
                 role="columnheader"
-                className={joinClassNames(text_medium, styles.week_day)}
+                className={joinClassNames(text_medium_light, styles.week_day)}
               >
                 {day}
               </div>
@@ -121,18 +124,19 @@ const DatePickerModal: VFC<DatePickerModalProps> = ({
               {monthDays
                 .filter((el, i) => i < (index + 1) * 7 && i >= index * 7)
                 .map((el, i) => (
-                  <div
-                    onClick={() => {}}
-                    role="gridcell"
-                    data-column={i}
-                    aria-label={`You choose ${el.dateString}`}
-                    tabIndex={0}
-                    data-date={el.dateString}
+                  <MonthDay
+                    available={el.available}
+                    column={i}
+                    dateString={el.dateString}
+                    firstSelected={el.monthDay === 27 && !el.dateString.includes("/09/")}
+                    lastSelected={el.monthDay === 31}
+                    selected={el.monthDay >= 27 && !el.dateString.includes("/09/") }
+                    monthDay={el.monthDay}
+                    timeStamp={el.timeStamp}
+                    today={el.today}
+                    onClick={() => { }}
                     key={el.dateString}
-                    className={styles.calendar_cell}
-                  >
-                    {el.monthDay}
-                  </div>
+                  />
                 ))}
             </div>
           ))}

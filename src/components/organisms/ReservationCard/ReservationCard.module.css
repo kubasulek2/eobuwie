@@ -3,7 +3,8 @@
 .card {
   border: 2px solid #CECECE;
   min-height: 20rem;
-  width: 100%;
+  width: 98%;
+  min-width: 320px;
   padding: 1.6rem;
   border-radius: 1px;
 }
@@ -35,8 +36,6 @@
 .error {
   visibility: visible;
 }
-
-
 
 /* Media queries */
 

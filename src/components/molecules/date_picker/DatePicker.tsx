@@ -7,7 +7,7 @@ import format from "date-fns/format";
 import {usePickerKeyboardControl} from "../../../hooks/usePickerKeyboardControl";
 import DatePickerModal from "./DatePickerModal";
 
-const DatePicker: VFC<DatePickerProps> = ({startDate, endDate, id, availableDates}) => {
+const DatePicker: VFC<DatePickerProps> = ({startDate, endDate, id, unavailableDates}) => {
   /* Handles picker state */
   const [pickerOpen, setPickerOpen] = useState<boolean>(false);
 
@@ -45,7 +45,7 @@ const DatePicker: VFC<DatePickerProps> = ({startDate, endDate, id, availableDate
 
       <DatePickerModal
         open={pickerOpen}
-        availableDates={availableDates}
+        unavailableDates={unavailableDates}
         id={modalId}
         onDates={() => {}}
       />

@@ -1,20 +1,63 @@
 .container {
-	flex: 1, 0, auto;
+	flex: 1 0 14.285%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	color: #aaa;
+	padding: 0 0.2rem;
 }
 
-.wrapper {}
+.wrapper {
+	box-sizing: border-box;
+	padding: 0.5rem;
+	width: 100%;
+	text-align: center;
+	border-style: solid;
+	border-radius: 50%;
+	border-width: 1.9px;
+	border-color: transparent;
+}
 
-.day {}
-
+.day {
+	font-size: 0.85rem;
+}
 
 /* Utility classes */
 
-.today {}
+.available .wrapper {
+	color: #555;
+	cursor: pointer;
+}
 
-.available {}
+/* Order must be preserved for proper CSS cascade */
 
-.selected {}
+.today .wrapper {
+	border-color: #00DBB1;
+	color: #00DBB1;
+}
 
-.selected.first {}
+.selected {
+	background-color: #C3FEF8;
+}
 
-.selected.last {}
+.selected .wrapper {
+	color: #00DBB1;
+}
+
+/* Apply gradient here, to hide .first selected container left padding and .last right padding */
+.first {
+	border-radius: 50% 0 0 50%;
+	background: rgb(255, 255, 255);
+	background: linear-gradient(90deg, rgba(255, 255, 255, 1) 6%, rgba(195, 254, 248, 1) 50%, rgba(195,254,248,1) 100%);
+}
+
+.last {
+	border-radius: 0 50% 50% 0;
+	background: rgb(255, 255, 255);
+	background: linear-gradient(90deg, rgba(195, 254, 248, 1) 0%, rgba(195,254,248,1) 50%, rgba(255, 255, 255, 1) 94%);
+}
+
+.first .wrapper, .last .wrapper {
+	background-color: #00DBB1;
+	color: #fff;
+}

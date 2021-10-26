@@ -36,7 +36,7 @@ const MonthDay: VFC<MonthDayProps> = ({
 			onClick={available ? () => onClick(timeStamp) : undefined}
 			role="gridcell"
 			data-column={column}
-			aria-label={`You choose ${dateString}`}
+			aria-label={`You choose ${ dateString }`}
 			tabIndex={0}
 			aria-disabled={!available}
 			data-date={dateString}
@@ -49,8 +49,9 @@ const MonthDay: VFC<MonthDayProps> = ({
 				lastClass
 			)}
 		>
-			<div className={styles.wrapper}></div>
-			<div className={styles.day}>{monthDay}</div>
+			<div className={styles.wrapper}>
+				<div className={styles.day}>{monthDay}</div>
+			</div>
 		</div>
 	);
 };

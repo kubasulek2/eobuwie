@@ -12,7 +12,7 @@ const App: VFC = () => {
         score={4.5}
         votes={100}
         price={200}
-        availableDates={[11234]}
+        unavailableDates={[]}
         startDate={null}
         endDate={null}
         setEndDate={() => {}}

@@ -6,7 +6,7 @@ import addDays from 'date-fns/addDays';
 import isSameDay from 'date-fns/isSameDay';
 import isSameMonth from 'date-fns/isSameMonth';
 import format from "date-fns/format";
-import {CalendarDate, MonthDay} from "../components/organisms/ReservationCard/types";
+import {CalendarDate, IMonthDay} from "../components/organisms/ReservationCard/types";
 
 /**
  * Function takes two dates as Date objects or timestamps and returns array of formatted MonthDay objects.
@@ -14,23 +14,23 @@ import {CalendarDate, MonthDay} from "../components/organisms/ReservationCard/ty
 export function computeCalendarDays (
   startDate: CalendarDate,
   endDate: CalendarDate,
-  availableDates: CalendarDate[],
+  unavailableDates: CalendarDate[],
   selectedDate: CalendarDate = new Date()
-): MonthDay[] {
+): IMonthDay[] {
 
   if (isBefore(endDate, startDate)) throw new TypeError('End date must not be before start date');
   const daysDiff = differenceInCalendarDays(endDate, startDate);
   const today = new Date();
 
   // for performance reasons filter available dates now, rather than check it each time in a loop
-  availableDates = availableDates.filter(d => isSameMonth(d, selectedDate));
+  unavailableDates = unavailableDates.filter(d => isSameMonth(d, selectedDate));
 
-  const days: MonthDay[] = [];
+  const days: IMonthDay[] = [];
   for (let i = 0; i <= daysDiff; i++) {
     const currentDay = addDays(startDate, i);
     const notPast = differenceInCalendarDays(currentDay,today) >= 0;
     days.push({
-      available: notPast && availableDates.some(d => isSameDay(d, currentDay)),
+      available: notPast && !unavailableDates.some(d => isSameDay(d, currentDay)),
       weekDay: getDay(currentDay),
       today: isToday(currentDay),
       timeStamp: currentDay.getTime(),

@@ -19,7 +19,7 @@ const ReservationCard: VFC<ReservationCardProps> = ({
   onSubmit,
   startDate,
   endDate,
-  availableDates,
+  unavailableDates,
   setEndDate,
   setStartDate,
 }) => {
@@ -40,7 +40,7 @@ const ReservationCard: VFC<ReservationCardProps> = ({
         <div className={styles.formControl}>
           <Label idFor="dummy1" title="Dates" size="small" />
           <DatePicker
-            availableDates={availableDates}
+            unavailableDates={unavailableDates}
             startDate={startDate}
             endDate={endDate}
             setStartDate={setStartDate}

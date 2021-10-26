@@ -2,7 +2,7 @@ export type CalendarDate = Date | number;
 export type ReservationCardProps = {
   startDate: CalendarDate | null;
   endDate: CalendarDate | null;
-  availableDates: (CalendarDate)[]
+  unavailableDates: (CalendarDate)[]
   price: number;
   score: number;
   votes: number;
@@ -11,7 +11,7 @@ export type ReservationCardProps = {
   onSubmit(): void
 }
 
-type MonthDay = {
+type IMonthDay = {
   timeStamp: number;
   available: boolean;
   today: boolean;

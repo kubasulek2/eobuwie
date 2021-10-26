@@ -93,8 +93,8 @@
 }
 
 .modal_header {
-  padding: .6rem;
-  font-size: 1.3rem;
+  padding: 1rem .8rem;
+  font-size: 1.5rem;
   word-spacing: 0.2rem;
   letter-spacing: .07rem;
   text-align: center;
@@ -112,8 +112,8 @@
   position: absolute;
   top: 9px;
   display: block;
-  width: 10px;
-  height: 10px;
+  width: 12px;
+  height: 12px;
   border: 0px solid #555;
   border-top-width: 3px;
 }
@@ -123,17 +123,17 @@
   display: block;
   position: absolute;
   bottom: 0;
-  width: 10px;
+  width: 12px;
   border-top: 1px solid #555;
   height: 0;
 }
 
 .month_arrow.month_arrow_left::after {
-  transform: rotate(45deg) translate(-8px, 7px);
+  transform: rotate(45deg) translate(-8px, 9px);
 }
 
 .month_arrow.month_arrow_right::after {
-  transform: rotate( -45deg) translate(6px, 6px);
+  transform: rotate( -45deg) translate(7px, 8px);
 }
 
 .month_arrow_left {
@@ -151,8 +151,8 @@
 .month_arrow_btn {
   position: relative;
   border-radius: 6px;
-  width: 32px;
-  height: 32px;
+  width: 34px;
+  height: 36px;
   padding: 0;
   outline: none;
   background-color: transparent;
@@ -168,24 +168,23 @@
 
 /* Calendar Grid */
 .calendar_container {
-  padding: 0.5rem 1rem; 
+  padding: .8rem; 
+  padding-bottom: 0;
 }
 
 .week_names {
   display: flex;
-  padding: 0.5rem 0;
+  justify-items: center;
+  padding: 0.8rem 0 1rem;
 }
 
 .week_day {
   font-size: .85rem;
   text-align: center;
-  flex: 1 0 auto;
+  flex: 1 0 14.285%;
 }
 .calendar_row {
   display: flex;
+  margin-bottom: .5rem;
 }
 
-.calendar_cell {
-  margin: .4rem;
-  flex: 1 0 auto;
-}
