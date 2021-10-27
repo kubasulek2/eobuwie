@@ -62,17 +62,37 @@ it('Calculates today\'s date', () => {
   expect(days[2].today).toBe(false);
 });
 
-it('Handles available dates', () => {
+it('Handles unavailable dates', () => {
   const startDate = new Date();
   // second of three available
-  const availableDates: CalendarDate[] = [addDays(startDate, 1)];
+  const unavailableDates: CalendarDate[] = [addDays(startDate, 1)];
   const endDate = addDays(startDate, 2);
   
-  const days = computeCalendarDays(startDate, endDate, availableDates);
+  const days = computeCalendarDays(startDate, endDate, unavailableDates);
   
-  expect(days[0].available).toBe(false);
+  expect(days[0].available).toBe(true);
   // second of three available
-  expect(days[1].available).toBe(true);
+  expect(days[1].available).toBe(false);
+  expect(days[2].available).toBe(true);
+});
+
+
+it('Handles lastAvailable date', () => {
+  const startDate = new Date();
+  // second of three available
+  const endDate = addDays(startDate, 2);
+  
+  const days = computeCalendarDays(
+		startDate,
+		endDate,
+		[addDays(startDate, 1)],
+		new Date(),
+		addDays(startDate, 1),
+	);
+  
+  expect(days[0].available).toBe(true);
+  expect(days[1].available).toBe(false);
+  // should not be available, becouse after lastAvailable
   expect(days[2].available).toBe(false);
 });
 
