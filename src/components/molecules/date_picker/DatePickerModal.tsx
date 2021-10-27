@@ -1,4 +1,4 @@
-import {useEffect, useState, VFC} from "react";
+import {VFC} from "react";
 import format from "date-fns/format";
 import addMonths from "date-fns/addMonths";
 import {DatePickerModalProps} from "./types";
@@ -10,55 +10,40 @@ import {
   cyan_bg,
   text_white,
 } from "../../../styles/colors";
-import {IMonthDay} from "../../organisms/ReservationCard/types";
-import {getCalendarMonthBoundries} from "../../../utils/getCalendarMonthBoundries";
-import {usePrevious} from "../../../hooks/usePrevious";
-import {computeCalendarDays} from "../../../utils/computeCalendarDays";
 import MonthDay from "../../atoms/month_day/MonthDay";
+import {IMonthDay} from "../../organisms/ReservationCard/types";
 
 
-/**
- */
+/** Week days abbreviations */
 const DAYS_OF_WEEK = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
 /**
  * Displays calendar popup.
- * Do most of the dates calculations.
  */
 const DatePickerModal: VFC<DatePickerModalProps> = ({
   open,
   id,
-  unavailableDates,
-  onDates,
+  monthDays,
+  pickerDate,
+  setPickerDate,
+  onDateClick,
+  startDate,
+  endDate,
 }) => {
-  /* Date for calendar manipulation */
-  const [date, setDate] = useState<Date>(new Date());
-  const [monthDays, setMonthDays] = useState<IMonthDay[]>([]);
-
-  // Use previous Date because availableDates array may be not memoized, causing constant component rerenders.
-  // Using prevDate will prevent hook belowe from recalculating monthDays all the time
-  const prevDate = usePrevious<Date>(date);
-
-  // Compute month days on each calendar date change
-  useEffect(() => {
-    if (!open) return;
-    // either no date yet or monthDays already computer and date hasn't changed
-    if (!date || (monthDays.length && date === prevDate)) return;
-
-    // calculate first and last day to display
-    const [start, end] = getCalendarMonthBoundries(date);
-
-    // calculate and set MonthDay object's array
-    setMonthDays(computeCalendarDays(start, end, unavailableDates, date));
-  }, [date, prevDate, open, unavailableDates, setMonthDays, monthDays]);
 
   // Calculates number of weeks in month view. This will serve as rows in our calendar.
   const calendarRows = Array.from(
     {length: monthDays.length / 7},
     (_, i) => i
   );
-  console.log(monthDays);
 
+  // Transform Date|number|null to number|null
+  const startTimestamp = !startDate ? null : "number" === typeof startDate ? startDate : startDate.getTime();
+  const endTimestamp = !endDate ? null : "number" === typeof endDate ? endDate : endDate.getTime();
+  
+  // Check if particular day is selected
+  const isDaySelected = (day: IMonthDay) => !endTimestamp ? day.timeStamp === startTimestamp : day.timeStamp >= (startTimestamp || 0) && day.timeStamp <= endTimestamp; 
+  
   return (
     <div
       className={styles.modal}
@@ -76,7 +61,7 @@ const DatePickerModal: VFC<DatePickerModalProps> = ({
           <button
             data-column={0}
             className={styles.month_arrow_btn}
-            onClick={() => setDate((prev) => addMonths(prev, -1))}
+            onClick={() => setPickerDate((prev) => addMonths(prev, -1))}
           >
             <span
               className={joinClassNames(
@@ -87,12 +72,12 @@ const DatePickerModal: VFC<DatePickerModalProps> = ({
             ></span>
           </button>
           <div className={styles.month}>
-            {format(date, "LLLL")} {date.getFullYear()}
+            {format(pickerDate, "LLLL")} {pickerDate.getFullYear()}
           </div>
           <button
             data-column={6}
             className={styles.month_arrow_btn}
-            onClick={() => setDate((prev) => addMonths(prev, 1))}
+            onClick={() => setPickerDate((prev) => addMonths(prev, 1))}
           >
             <span
               className={joinClassNames(
@@ -122,20 +107,20 @@ const DatePickerModal: VFC<DatePickerModalProps> = ({
               className={styles.calendar_row}
             >
               {monthDays
-                .filter((el, i) => i < (index + 1) * 7 && i >= index * 7)
-                .map((el, i) => (
+                .filter((_, i) => i < (index + 1) * 7 && i >= index * 7)
+                .map((day, i) => (
                   <MonthDay
-                    available={el.available}
+                    available={day.available}
                     column={i}
-                    dateString={el.dateString}
-                    firstSelected={el.monthDay === 27 && !el.dateString.includes("/09/")}
-                    lastSelected={el.monthDay === 31}
-                    selected={el.monthDay >= 27 && !el.dateString.includes("/09/") }
-                    monthDay={el.monthDay}
-                    timeStamp={el.timeStamp}
-                    today={el.today}
-                    onClick={() => { }}
-                    key={el.dateString}
+                    dateString={day.dateString}
+                    firstSelected={day.timeStamp === startTimestamp}
+                    lastSelected={day.timeStamp === endTimestamp}
+                    selected={isDaySelected(day)}
+                    monthDay={day.monthDay}
+                    timeStamp={day.timeStamp}
+                    today={day.today}
+                    onClick={() => onDateClick(day)}
+                    key={day.dateString}
                   />
                 ))}
             </div>

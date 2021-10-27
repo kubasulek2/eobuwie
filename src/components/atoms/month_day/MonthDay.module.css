@@ -45,19 +45,24 @@
 }
 
 /* Apply gradient here, to hide .first selected container left padding and .last right padding */
+
 .first {
 	border-radius: 50% 0 0 50%;
 	background: rgb(255, 255, 255);
-	background: linear-gradient(90deg, rgba(255, 255, 255, 1) 6%, rgba(195, 254, 248, 1) 50%, rgba(195,254,248,1) 100%);
+	background: linear-gradient(90deg, rgba(255, 255, 255, 1) 6%, rgba(195, 254, 248, 1) 50%, rgba(195, 254, 248, 1) 100%);
 }
 
 .last {
 	border-radius: 0 50% 50% 0;
 	background: rgb(255, 255, 255);
-	background: linear-gradient(90deg, rgba(195, 254, 248, 1) 0%, rgba(195,254,248,1) 50%, rgba(255, 255, 255, 1) 94%);
+	background: linear-gradient(90deg, rgba(195, 254, 248, 1) 0%, rgba(195, 254, 248, 1) 50%, rgba(255, 255, 255, 1) 94%);
 }
 
 .first .wrapper, .last .wrapper {
 	background-color: #00DBB1;
 	color: #fff;
+}
+
+:not(.selected).available .wrapper:hover {
+	border-color: #777;
 }
