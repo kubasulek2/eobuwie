@@ -1,4 +1,4 @@
-import {CalendarDate} from "../components/organisms/ReservationCard/types";
+import {CalendarDate} from "../hooks/useDatePicker";
 import {computeCalendarDays} from './computeCalendarDays';
 import addDays from 'date-fns/addDays';
 

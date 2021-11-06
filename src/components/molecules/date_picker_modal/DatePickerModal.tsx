@@ -2,7 +2,7 @@ import {VFC} from "react";
 import format from "date-fns/format";
 import addMonths from "date-fns/addMonths";
 import {DatePickerModalProps} from "./types";
-import styles from "./DatePicker.module.css";
+import styles from "./DatePickerModal.module.css";
 import {joinClassNames} from "../../../utils/joinClassNames";
 import {
   text_medium_light,
@@ -11,7 +11,7 @@ import {
   text_white,
 } from "../../../styles/colors";
 import MonthDay from "../../atoms/month_day/MonthDay";
-import {IMonthDay} from "../../organisms/ReservationCard/types";
+import {IMonthDay} from "../../../hooks/useDatePicker";
 
 
 /** Week days abbreviations */

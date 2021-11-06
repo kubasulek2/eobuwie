@@ -5,7 +5,7 @@ import Divider from "../../atoms/divider/Divider";
 import Input from "../../atoms/input/Input";
 import Label from "../../atoms/label/Label";
 import ReservationHeader from "../../molecules/reservation_header/ReservationHeader";
-import DatePicker from "../../molecules/date_picker/DatePicker";
+import DatePicker from "../date_picker/DatePicker";
 import styles from "./ReservationCard.module.css";
 import { ReservationCardProps } from "./types";
 

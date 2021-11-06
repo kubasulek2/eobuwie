@@ -5,7 +5,7 @@ import isSameDay from 'date-fns/isSameDay';
 import startOfMonth from 'date-fns/startOfMonth';
 import differenceInDays from 'date-fns/differenceInDays';
 import addDays from 'date-fns/addDays';
-import {CalendarDate} from "../components/organisms/ReservationCard/types";
+import {CalendarDate} from "../hooks/useDatePicker";
 
 
 /**

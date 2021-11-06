@@ -2,8 +2,8 @@ import {useState, VFC} from "react";
 import styles from "./App.module.css";
 import {joinClassNames} from "../../../utils/joinClassNames";
 import {gray_light_bg} from "../../../styles/colors";
-import ReservationCard from "../../organisms/ReservationCard/ReservationCard";
-import {CalendarDate} from "../../organisms/ReservationCard/types";
+import ReservationCard from "../../organisms/reservation_card/ReservationCard";
+import {CalendarDate} from "../../../hooks/useDatePicker";
 
 
 const App: VFC = () => {

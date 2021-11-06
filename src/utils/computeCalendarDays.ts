@@ -9,7 +9,7 @@ import format from 'date-fns/format';
 import {
 	CalendarDate,
 	IMonthDay,
-} from '../components/organisms/ReservationCard/types';
+} from '../hooks/useDatePicker';
 
 /**
  * Function takes two dates as Date objects or timestamps and returns array of formatted MonthDay objects.
