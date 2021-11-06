@@ -46,6 +46,8 @@ const MonthDay: VFC<MonthDayProps> = ({
 
 	return (
 		<div
+			/* Prevent focus on click */
+			onMouseDown={e => e.preventDefault()}
 			data-testid="month_day"
 			onClick={available ? () => onClick(timeStamp) : undefined}
 			role="gridcell"

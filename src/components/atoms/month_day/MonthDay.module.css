@@ -36,6 +36,8 @@
 	color: #00DBB1;
 }
 
+/* When day is only one selected, should not have special background */
+
 .selected:not(.only) {
 	background-color: #C3FEF8;
 }
@@ -43,8 +45,14 @@
 .selected .wrapper {
 	color: #00DBB1;
 }
-.only {}
-/* Apply gradient here, to hide .first selected container left padding and .last right padding */
+
+/* Need this empty class here to use it in :not() slector below. Presumably that is the way css modules works. */
+
+.only {
+	/*  */
+}
+
+/* Apply gradient to hide .first selected container left padding and .last selected right padding */
 
 .first:not(.only) {
 	border-radius: 50% 0 0 50%;
@@ -63,6 +71,16 @@
 	color: #fff;
 }
 
+/* Handle hover over selectable elements */
+
 :not(.selected).available .wrapper:hover {
 	border-color: #00DBB1;
+}
+
+/* Handle keyboard focus */
+
+.container:focus {
+	border-radius: 0;
+	outline: none;
+	background: #81fff2
 }

@@ -12,6 +12,10 @@ import {IMonthDay} from "../../organisms/ReservationCard/types";
 import {usePrevious} from "../../../hooks/usePrevious";
 import {isSameDay} from "date-fns";
 
+
+/**
+ * Displays datepicker button. Renders calendar popup component. Handles all logic picker logic 
+ */
 const DatePicker: VFC<DatePickerProps> = ({startDate, endDate, id, unavailableDates, setStartDate, setEndDate}) => {
   /* Handles picker state */
   const [pickerOpen, setPickerOpen] = useState<boolean>(false);
@@ -33,13 +37,26 @@ const DatePicker: VFC<DatePickerProps> = ({startDate, endDate, id, unavailableDa
   const endDateString = endDate ? format(endDate, "dd/MM/yyyy") : "Check Out";
 
   /* Concatenated classes of dates buttons */
-  const startDateClasses = (pickerOpen || startDate) ? joinClassNames(styles.date, teal, teal_light_bg) : styles.date;
-  const endDateClasses = endDate ? joinClassNames(styles.date, teal, teal_light_bg) : styles.date;
+  const startDateClasses = (pickerOpen && !startDate) ? joinClassNames(styles.date, teal, teal_light_bg) : styles.date;
+  const endDateClasses = (pickerOpen && startDate && !endDate) ? joinClassNames(styles.date, teal, teal_light_bg) : styles.date;
 
+  /* Remember previous startDate and endDate to prevent infinite state recalculation in useEffect */
+  const prevStartDate = usePrevious(startDate);
+  const prevEndDate = usePrevious(endDate);
 
   // Handles focus, and keyboard control
   usePickerKeyboardControl(pickerOpen, setPickerOpen, modalId);
 
+
+
+  // Clear dates each time picker is open. Otherwise start date can never be changed
+  // Also when date setting is not complete, clear on close
+  useEffect(() => {
+    if ((pickerOpen && prevEndDate === endDate)|| (!pickerOpen && !endDate)) {
+      setStartDate(null);
+      setEndDate(null);
+    }
+  }, [pickerOpen, setStartDate, setEndDate, endDate, prevEndDate]);
 
 
   // Compute month days on each calendar date change
@@ -57,6 +74,8 @@ const DatePicker: VFC<DatePickerProps> = ({startDate, endDate, id, unavailableDa
     setMonthDays(computeCalendarDays(start, end, unavailableDates, pickerDate));
   }, [pickerDate, prevDate, pickerOpen, unavailableDates, setMonthDays, monthDays, startDate]);
 
+
+  
   // Recalculate month days when either startDate, or both startDate and endDate are set.
   // User shouldn't be able to have unavailable date between start and end dates
   // This hooks computes days only when at least startDate is set
@@ -64,6 +83,7 @@ const DatePicker: VFC<DatePickerProps> = ({startDate, endDate, id, unavailableDa
     // Prevent unecessary recomputation
     if (!pickerOpen || !pickerDate || !monthDays.length) return;
     if (!startDate) return;
+    if (startDate === prevStartDate) return;
 
     // calculate first and last day to display
     const [start, end] = getCalendarMonthBoundries(pickerDate);
@@ -82,7 +102,8 @@ const DatePicker: VFC<DatePickerProps> = ({startDate, endDate, id, unavailableDa
 
     // calculate and set MonthDay object's array
     setMonthDays(calDays);
-  }, [pickerDate, pickerOpen, unavailableDates, setMonthDays, monthDays, startDate]);
+  }, [pickerDate, pickerOpen, unavailableDates, setMonthDays, monthDays, startDate, prevStartDate]);
+
 
 
   /* Memoized date handler */
@@ -92,11 +113,10 @@ const DatePicker: VFC<DatePickerProps> = ({startDate, endDate, id, unavailableDa
 
     // Neither start or end dates set
     if (!startDate) return setStartDate(day.timeStamp);
-    
+
     // Set or cancel startDate when endDate not yet set
     if (startDate && !endDate) {
-      const sameDay = isSameDay(startDate, day.timeStamp);
-      return sameDay ? setStartDate(null) : setEndDate(day.timeStamp);
+      return setEndDate(day.timeStamp);
     }
 
     // Reset or cancel ebdDate when endDate already set
