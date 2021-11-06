@@ -11,6 +11,8 @@ export function usePickerKeyboardControl(
   setPickerOpen: Dispatch<SetStateAction<boolean>>,
   id: string
 ) {
+
+  /* Helps handle restoring focus after closing date picker */
   const [lastActiveElement, setLastActiveElement] = useState<Element | null>(
     null
   );

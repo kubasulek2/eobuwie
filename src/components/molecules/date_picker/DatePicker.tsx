@@ -110,6 +110,7 @@ const DatePicker: VFC<DatePickerProps> = ({startDate, endDate, id, unavailableDa
   return (
     <div data-testid="date_picker" id={pickerId} className={styles.wrapper}>
       <button
+        onMouseDown={e => e.preventDefault()}
         onClick={() => setPickerOpen(prev => !prev)}
         className={joinClassNames(styles.picker, text_medium_dark, pickerOpen ? styles.modal_open : "")}
         aria-controls={pickerId + "_dialog"}
