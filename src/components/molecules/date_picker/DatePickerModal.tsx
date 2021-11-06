@@ -40,10 +40,13 @@ const DatePickerModal: VFC<DatePickerModalProps> = ({
   // Transform Date|number|null to number|null
   const startTimestamp = !startDate ? null : "number" === typeof startDate ? startDate : startDate.getTime();
   const endTimestamp = !endDate ? null : "number" === typeof endDate ? endDate : endDate.getTime();
-  
+
   // Check if particular day is selected
-  const isDaySelected = (day: IMonthDay) => !endTimestamp ? day.timeStamp === startTimestamp : day.timeStamp >= (startTimestamp || 0) && day.timeStamp <= endTimestamp; 
-  
+  const isDaySelected = (day: IMonthDay) => !endTimestamp ? day.timeStamp === startTimestamp : day.timeStamp >= (startTimestamp || 0) && day.timeStamp <= endTimestamp;
+
+  // Check if particular day is selected and only one selected
+  const isOnlySelected = (day: IMonthDay) => isDaySelected(day) && (!endTimestamp || (day.timeStamp === endTimestamp && day.timeStamp === startTimestamp));
+
   return (
     <div
       className={styles.modal}
@@ -110,6 +113,7 @@ const DatePickerModal: VFC<DatePickerModalProps> = ({
                 .filter((_, i) => i < (index + 1) * 7 && i >= index * 7)
                 .map((day, i) => (
                   <MonthDay
+                    onlySelected={isOnlySelected(day)}
                     available={day.available}
                     column={i}
                     dateString={day.dateString}

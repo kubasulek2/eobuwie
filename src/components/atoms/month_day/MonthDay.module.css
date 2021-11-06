@@ -36,23 +36,23 @@
 	color: #00DBB1;
 }
 
-.selected {
+.selected:not(.only) {
 	background-color: #C3FEF8;
 }
 
 .selected .wrapper {
 	color: #00DBB1;
 }
-
+.only {}
 /* Apply gradient here, to hide .first selected container left padding and .last right padding */
 
-.first {
+.first:not(.only) {
 	border-radius: 50% 0 0 50%;
 	background: rgb(255, 255, 255);
 	background: linear-gradient(90deg, rgba(255, 255, 255, 1) 6%, rgba(195, 254, 248, 1) 50%, rgba(195, 254, 248, 1) 100%);
 }
 
-.last {
+.last:not(.only) {
 	border-radius: 0 50% 50% 0;
 	background: rgb(255, 255, 255);
 	background: linear-gradient(90deg, rgba(195, 254, 248, 1) 0%, rgba(195, 254, 248, 1) 50%, rgba(255, 255, 255, 1) 94%);
@@ -64,5 +64,5 @@
 }
 
 :not(.selected).available .wrapper:hover {
-	border-color: #777;
+	border-color: #00DBB1;
 }

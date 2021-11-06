@@ -2,15 +2,16 @@ import {render, screen} from '@testing-library/react';
 import DatePicker from "./DatePicker";
 import format from "date-fns/format";
 import userEvent from "@testing-library/user-event";
+import {DatePickerProps} from "./types";
 
 const setStartDate = jest.fn();
 const setEndDate = jest.fn();
-const defaultProps = {
+const defaultProps: DatePickerProps = {
   startDate: null,
   setEndDate,
   setStartDate,
   endDate: null,
-  availableDates: []
+  unavailableDates: []
 };
 beforeEach(() => {
   jest.clearAllMocks();
@@ -85,20 +86,20 @@ describe('Rendering and accessibility', () => {
     render(<DatePicker {...defaultProps} />);
     expect(() => screen.getByRole("dialog")).toThrow();
   });
-  
+
   it('Open Picker has accessible role', async () => {
     render(<DatePicker {...defaultProps} />);
     userEvent.click(screen.getByRole("button"));
-    
+
     await screen.findByRole("dialog");
-    
+
   });
-  
+
   it('Picker has accessible label', () => {
     render(<DatePicker {...defaultProps} />);
     screen.getByLabelText("reservation dates", {exact: false});
   });
-  
+
   it('Closed picker has proper aria attributes', () => {
     render(<DatePicker {...defaultProps} />);
     const container = screen.getByTestId("date_picker");
@@ -106,10 +107,10 @@ describe('Rendering and accessibility', () => {
     expect(picker).toHaveAttribute("aria-hidden", "true");
     expect(picker).toHaveAttribute("aria-modal", "false");
   });
-  
+
   it('Open picker has proper aria attributes', async () => {
     render(<DatePicker {...defaultProps} />);
-    
+
     userEvent.click(screen.getByRole("button"));;
     const picker = await screen.findByRole("dialog");
     expect(picker).toHaveAttribute("aria-hidden", "false");

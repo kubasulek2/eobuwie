@@ -8,5 +8,6 @@ export type MonthDayProps = {
     selected: boolean;
     firstSelected: boolean;
     lastSelected: boolean;
+    onlySelected: boolean;
     onClick: (timeStamp: number) => void;
 }

@@ -14,10 +14,12 @@ const renderer = (
 	first = false,
 	last = false,
 	selected = false,
-	today = false
+	today = false,
+	only = false,
 ) =>
 	render(
 		<MonthDay
+			onlySelected={only}
 			onClick={onClick}
 			available={available}
 			column={1}
@@ -32,11 +34,9 @@ const renderer = (
 	);
 
 describe('Rendering', () => {
-	it.todo(
-		'Matches screenshot' //() => {
-		//   expect(renderer()).toMatchSnapshot();
-		// }
-	);
+	it('Matches screenshot', () => {
+		expect(renderer()).toMatchSnapshot();
+	});
 
 	it('Renders', () => {
 		renderer();
@@ -106,34 +106,40 @@ describe('Functionality', () => {
 		const container = screen.getByRole('gridcell').parentElement!;
 		expect(container.querySelector('.' + styles.today)).toBeInTheDocument();
 	});
-	
-  it('Has proper class when available', () => {
+
+	it('Has proper class when available', () => {
 		renderer();
 		const container = screen.getByRole('gridcell').parentElement!;
 		expect(container.querySelector('.' + styles.available)).toBeInTheDocument();
 	});
-  
-  it('Has no available class when not available', () => {
+
+	it('Has no available class when not available', () => {
 		renderer(false);
 		const container = screen.getByRole('gridcell').parentElement!;
 		expect(container.querySelector('.' + styles.available)).toBeNull();
 	});
 
-  it('Has proper class when selected', () => {
+	it('Has proper class when selected', () => {
 		renderer(true, false, false, true);
 		const container = screen.getByRole('gridcell').parentElement!;
 		expect(container.querySelector('.' + styles.selected)).toBeInTheDocument();
 	});
-  
-  it('Has proper class when firstSelected', () => {
-    renderer(true, true, false, true);
+
+	it('Has proper class when firstSelected', () => {
+		renderer(true, true, false, true);
 		const container = screen.getByRole('gridcell').parentElement!;
 		expect(container.querySelector('.' + styles.available)).toBeInTheDocument();
 	});
-  
-  it('Has proper class when lastSelected', () => {
-    renderer(true, false, true, true);
+
+	it('Has proper class when lastSelected', () => {
+		renderer(true, false, true, true);
 		const container = screen.getByRole('gridcell').parentElement!;
 		expect(container.querySelector('.' + styles.available)).toBeInTheDocument();
+	});
+
+	it('Has proper class when onlySelected', () => {
+		renderer(true, false, true, true, true, true);
+		const container = screen.getByRole('gridcell').parentElement!;
+		expect(container.querySelector('.' + styles.only)).toBeInTheDocument();
 	});
 });
