@@ -52,7 +52,7 @@ export function useDatePicker(
 	);
 
 	// Handles focus, and keyboard control
-	usePickerKeyboardControl(pickerOpen, setPickerOpen, modalId);
+	usePickerKeyboardControl(pickerOpen, setPickerOpen, pickerId, modalId);
 
 	// Clear dates each time picker is open. Otherwise start date can never be changed
 	// Also when date setting is not complete, clear on close
