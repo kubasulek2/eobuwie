@@ -1,4 +1,5 @@
 import {VFC, FormEvent, useState, useCallback} from 'react';
+import differenceInCalendarDays from 'date-fns/differenceInCalendarDays';
 import {CalendarDate} from '../../../hooks/useDatePicker';
 import {joinClassNames} from '../../../utils/joinClassNames';
 import Button from '../../atoms/button/Button';
@@ -31,6 +32,15 @@ const ReservationCard: VFC<ReservationCardProps> = ({
 		//  check if dates are set
 		if (!startDate || !endDate) {
 			setFormError('Both dates must be set');
+			return false;
+		}
+		
+    //  check if any date in the past
+		if (
+			differenceInCalendarDays(startDate, new Date()) < 0 ||
+			differenceInCalendarDays(endDate, new Date()) < 0
+		) {
+			setFormError('Cannot reserve past dates');
 			return false;
 		}
 
@@ -74,10 +84,10 @@ const ReservationCard: VFC<ReservationCardProps> = ({
 	);
 
 	return (
-		<div className={styles.card}>
+		<div className={styles.card} data-testid="reservation_card">
 			<ReservationHeader price={price} score={score} votes={votes} />
 			<Divider />
-			<form onSubmit={handleSubmit}>
+			<form onSubmit={handleSubmit} name="reservation_form">
 				<div className={styles.formControl}>
 					<Label idFor="dummy1" title="Dates" size="small" />
 					<DatePicker
@@ -95,15 +105,17 @@ const ReservationCard: VFC<ReservationCardProps> = ({
 						id="dummy1"
 						placeholder="Dummy content"
             onChange={() => setFormError("")}
+            name="dummy1"
 					/>
 				</div>
 
 				<div className={styles.formControl}>
-					<Label idFor="dummy1" title="Dummy 2" size="small" />
+					<Label idFor="dummy2" title="Dummy 2" size="small" />
 					<Input
 						id="dummy2"
 						placeholder="Dummy content 2"
             onChange={() => setFormError("")}
+            name="dummy2"
 					/>
 				</div>
 
