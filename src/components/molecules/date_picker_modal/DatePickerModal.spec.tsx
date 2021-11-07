@@ -90,7 +90,65 @@ describe('Rendering', () => {
 	});
 });
 
-describe('Accessibility', () => {});
+describe('Accessibility', () => {
+	it('Has dialog role', () => {
+		renderer();
+		screen.getByRole("dialog");
+	});
+	
+	it('Has proper label', () => {
+		renderer();
+		screen.getByLabelText('Choose reservation dates');
+		
+	});
+	
+	it('Has aria-modal role', () => {
+		renderer();
+		const modal = screen.getByRole("dialog");
+		expect(modal.getAttribute("aria-modal")).toBe("true");
+	});
+	
+	it('closed modal has aria-modal="false" attribute', () => {
+		renderer(false);
+		const modal = screen.getByRole("dialog", {hidden: true});
+		expect(modal.getAttribute("aria-modal")).toBe("false");
+	});
+	
+	it('Icon buttons have accessible title', () => {
+		renderer();
+		expect(screen.getAllByTitle(/^Previous month$|^Next Month$/)).toHaveLength(2);
+	});
+	
+	it('Icons in icon buttons are hidden from assistive technologies', () => {
+		renderer();
+		const [btn1, btn2] = screen.getAllByTitle(/^Previous month$|^Next Month$/);
+		expect(btn1.querySelector('span[aria-hidden="true"]')).toBeInTheDocument();
+		expect(btn2.querySelector('span[aria-hidden="true"]')).toBeInTheDocument();
+	});
+	
+	it('Calendar has grid role', () => {
+		renderer();
+		screen.getByRole("grid");
+	});
+	
+	it('Calendar grid has 7 columns header', () => {
+		renderer();
+		const headers = screen.getAllByRole('columnheader');
+		expect(headers).toHaveLength(7);
+		expect(headers[0]).toHaveTextContent(DAYS_OF_WEEK[0]);
+	});
+	
+	it('Each day has grid cell role', () => {
+		const {monthDays} = renderer();
+		expect(screen.getAllByRole("gridcell")).toHaveLength(monthDays.length);
+	});
+	
+	it('Each week is groupped in a row and one extra row for week day names', () => {
+		const {monthDays} = renderer();
+		expect(screen.getAllByRole("row")).toHaveLength(Math.floor(monthDays.length / 7) + 1);
+	});
+
+});
 
 describe('Functionality', () => {
 	it('Clicks the date when available', () => {
@@ -127,5 +185,14 @@ describe('Functionality', () => {
 			screen.getByText('15'),
 		);
 		expect(onDateClick).not.toBeCalled();
+	});
+	
+	it('Clicks change month buttons', () => {
+		// default date is in the past
+		renderer();
+		const buttons = screen.getAllByRole("button");
+		userEvent.click(buttons[0]);
+		userEvent.click(buttons[1]);
+		expect(setPickerDate).toBeCalledTimes(2);
 	});
 });

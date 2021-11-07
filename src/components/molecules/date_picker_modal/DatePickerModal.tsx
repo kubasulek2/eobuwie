@@ -60,7 +60,6 @@ const DatePickerModal: VFC<DatePickerModalProps> = ({
 		<div
 			className={styles.modal}
 			hidden={!open}
-			aria-hidden={open ? 'false' : 'true'}
 			aria-modal={open ? 'true' : 'false'}
 			role="dialog"
 			aria-label="Choose reservation dates"
@@ -77,6 +76,7 @@ const DatePickerModal: VFC<DatePickerModalProps> = ({
 						onClick={() => setPickerDate((prev) => addMonths(prev, -1))}
 					>
 						<span
+							aria-hidden="true"
 							className={joinClassNames(
 								text_medium_dark,
 								styles.month_arrow,
@@ -94,6 +94,7 @@ const DatePickerModal: VFC<DatePickerModalProps> = ({
 						onClick={() => setPickerDate((prev) => addMonths(prev, 1))}
 					>
 						<span
+							aria-hidden="true"
 							className={joinClassNames(
 								text_medium_dark,
 								styles.month_arrow,
