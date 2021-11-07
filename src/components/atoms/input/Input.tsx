@@ -13,7 +13,7 @@ const Input: VFC<InputProps> = ({value, onChange, id, placeholder, type="text", 
       {...htmlProps}
       className={joinClassNames(styles.input, text_medium, ...classes)}
       value={value}
-      onChange={e => onChange(e.target.value)}
+      onChange={e => onChange ? onChange(e.target.value) : undefined}
       placeholder={placeholder}
       type={type}
       id={id}
