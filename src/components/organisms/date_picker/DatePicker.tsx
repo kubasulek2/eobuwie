@@ -33,7 +33,7 @@ const DatePicker: VFC<DatePickerProps> = ({
 		setPickerDate,
 		setPickerOpen,
 		pickerId,
-    modalId
+		modalId,
 	} = useDatePicker(
 		setStartDate,
 		setEndDate,
