@@ -39,9 +39,9 @@ export function useDatePicker(
 	// Using prevDate will prevent hook belowe from recalculating monthDays all the time
 	const prevDate = usePrevious<Date>(pickerDate);
 
-	/* Remember previous startDate and endDate to prevent infinite state recalculation in useEffect */
+	/* Remember previous startDate and pickerOpen to optimize state recalculation in useEffect */
 	const prevStartDate = usePrevious(startDate);
-	const prevEndDate = usePrevious(endDate);
+	const prevOpen = usePrevious(pickerOpen);
 
 	const pickerId = id || 'reservation_date_picker';
 
@@ -57,17 +57,16 @@ export function useDatePicker(
 	// Clear dates each time picker is open. Otherwise start date can never be changed
 	// Also when date setting is not complete, clear on close
 	useEffect(() => {
-		if ((pickerOpen && prevEndDate === endDate) || (!pickerOpen && !endDate)) {
+		if ((pickerOpen && !prevOpen) || (!pickerOpen && !endDate)) {
 			setStartDate(null);
 			setEndDate(null);
 		}
-	}, [pickerOpen, setStartDate, setEndDate, endDate, prevEndDate]);
-
+	}, [pickerOpen, setStartDate, setEndDate, endDate, prevOpen]);
 	// Compute month days on each calendar date change
 	// This hooks computes days only when startDate not set
 	useEffect(() => {
 		// Prevent uneccessary recomputations
-		if (!pickerOpen || startDate) return;
+		if (!pickerOpen) return;
 		// either no date yet or monthDays already computer and date hasn't changed
 		if (!pickerDate || (monthDays.length && pickerDate === prevDate)) return;
 
