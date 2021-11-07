@@ -100,23 +100,6 @@ describe('Rendering and accessibility', () => {
     screen.getByLabelText("reservation dates", {exact: false});
   });
 
-  it('Closed picker has proper aria attributes', () => {
-    render(<DatePicker {...defaultProps} />);
-    const container = screen.getByTestId("date_picker");
-    const picker = container.querySelector("div[role='dialog']");
-    expect(picker).toHaveAttribute("aria-hidden", "true");
-    expect(picker).toHaveAttribute("aria-modal", "false");
   });
-
-  it('Open picker has proper aria attributes', async () => {
-    render(<DatePicker {...defaultProps} />);
-
-    userEvent.click(screen.getByRole("button"));;
-    const picker = await screen.findByRole("dialog");
-    expect(picker).toHaveAttribute("aria-hidden", "false");
-    expect(picker).toHaveAttribute("aria-modal", "true");
-  });
-
-});
 
 
