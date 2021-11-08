@@ -23,9 +23,11 @@ it('Has proper label', () => {
 
 it('Displays right score', () => {
   render(<StarRating score={3.5} votes={100} />);
-  expect(screen.getAllByText('star')).toHaveLength(3); // 4 full stars
-  expect(screen.getAllByText('star_half')).toHaveLength(1); // 1 half star
-  expect(screen.getAllByText('star_border')).toHaveLength(1); // 1 empty star
+  const stars = screen.getAllByTestId('star');
+  expect(screen.getAllByTestId('star')).toHaveLength(5); // 5 stars always
+  [stars[0], stars[1], stars[2]].forEach(element => expect(element.firstElementChild?.classList.contains('star')).toBe(true)); // 3 full stars
+  expect(stars[3].firstElementChild?.classList.contains('star_half')).toBe(true); // 1 half star
+  expect(stars[4].firstElementChild?.classList.contains('star_empty')).toBe(true); // 1 empty star
 });
 
 it('Displays right vote\'s number', () => {

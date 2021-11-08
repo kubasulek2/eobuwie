@@ -6,27 +6,47 @@ Object {
   "baseElement": <body>
     <div>
       <div
+        aria-hidden="true"
         data-testid="star"
         role="presentation"
       >
-        <span
-          class="material-icons teal medium"
+        <svg
+          class="material-icons star medium"
+          viewBox="0 0 595.28 841.89"
+          xmlns="http://www.w3.org/2000/svg"
         >
-          star
-        </span>
+          <polygon
+            class="one"
+            points="162.73 472.56 269.54 472.56 302.54 370.98 302.54 574.13 216.14 636.91 249.14 535.33 162.73 472.56"
+          />
+          <polygon
+            class="two"
+            points="442.45 472.56 335.64 472.56 302.64 370.98 302.64 574.13 389.04 636.91 356.04 535.33 442.45 472.56"
+          />
+        </svg>
       </div>
     </div>
   </body>,
   "container": <div>
     <div
+      aria-hidden="true"
       data-testid="star"
       role="presentation"
     >
-      <span
-        class="material-icons teal medium"
+      <svg
+        class="material-icons star medium"
+        viewBox="0 0 595.28 841.89"
+        xmlns="http://www.w3.org/2000/svg"
       >
-        star
-      </span>
+        <polygon
+          class="one"
+          points="162.73 472.56 269.54 472.56 302.54 370.98 302.54 574.13 216.14 636.91 249.14 535.33 162.73 472.56"
+        />
+        <polygon
+          class="two"
+          points="442.45 472.56 335.64 472.56 302.64 370.98 302.64 574.13 389.04 636.91 356.04 535.33 442.45 472.56"
+        />
+      </svg>
     </div>
   </div>,
   "debug": [Function],

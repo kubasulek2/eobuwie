@@ -6,6 +6,9 @@ import ReservationCard from "../../organisms/reservation_card/ReservationCard";
 import {CalendarDate} from "../../../hooks/useDatePicker";
 
 
+/**
+ * Main Component, added to project to render ReservationCard
+ */
 const App: VFC = () => {
   const [startDate, setStartDate] = useState<CalendarDate | null>(null);
   const [endDate, setEndDate] = useState<CalendarDate | null>(null);
