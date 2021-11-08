@@ -3,17 +3,16 @@ import {MonthDayProps} from './types';
 import styles from './MonthDay.module.css';
 import {joinClassNames} from '../../../utils/joinClassNames';
 
-
 /**
  * Single day of calendar picker.
- * 
+ *
  * Explanation of some of the props:
  * - available: can be selected
  * - selected: is selected, must be available
  * - firstSelected: is first of all selected, must be selected
  * - lastSelected: is last of all selected, must be selected
  * - onlySelected: is only one selected, must be selected
- * 
+ *
  */
 const MonthDay: VFC<MonthDayProps> = ({
 	dateString,
@@ -26,17 +25,19 @@ const MonthDay: VFC<MonthDayProps> = ({
 	lastSelected,
 	selected,
 	onlySelected,
-	today
+	today,
 }) => {
 	// Prevent user from misusing component
 	if ((firstSelected || lastSelected || onlySelected) && !selected)
 		throw new Error(
-			'MonthDay cannot be firstSelected or lastSelected without being selected'
+			'MonthDay cannot be firstSelected or lastSelected without being selected',
 		);
 
+	// Prevent user from misusing component
 	if (!available && selected)
 		throw new Error('MonthDay cannot be selected without being available');
 
+	/* All css classes */
 	const availableClass = available ? styles.available : '';
 	const todayClass = today ? styles.today : '';
 	const selectedClass = selected ? styles.selected : '';
@@ -47,14 +48,14 @@ const MonthDay: VFC<MonthDayProps> = ({
 	return (
 		<div
 			/* Prevent focus on click */
-			onMouseDown={e => e.preventDefault()}
+			onMouseDown={(e) => e.preventDefault()}
 			data-testid="month_day"
 			onClick={available ? () => onClick(timeStamp) : undefined}
 			role="gridcell"
 			data-column={column}
-			aria-label={`You choose ${ dateString }`}
+			aria-label={`You choose ${dateString}`}
 			tabIndex={0}
-			aria-disabled={available ? "false" : "true"}
+			aria-disabled={available ? 'false' : 'true'}
 			data-date={dateString}
 			className={joinClassNames(
 				styles.container,
@@ -63,7 +64,7 @@ const MonthDay: VFC<MonthDayProps> = ({
 				selectedClass,
 				firstClass,
 				lastClass,
-				onlyClass
+				onlyClass,
 			)}
 		>
 			<div className={styles.wrapper}>

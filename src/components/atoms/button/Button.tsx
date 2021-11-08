@@ -13,7 +13,7 @@ const Button: FC<ButtonProps> = ({children, id, onClick, type = "button", size =
       /* Do not add disabled atribute due to accessibility reasons, make it class instead */
       className={joinClassNames(styles.button, styles[size], (disabled ? styles.disabled : ""),  ...classes)}
       /* Make sure if disabled is on, aria-disabled is set */
-      aria-disabled={Boolean(disabled)}
+      aria-disabled={disabled ? "true" : "false"}
       id={id}
       type={type}
       onClick={!disabled ? onClick : undefined}

@@ -5,7 +5,7 @@ import {joinClassNames} from "../../../utils/joinClassNames";
 import {text_medium} from "../../../styles/colors";
 
 /**
- * Text or date input. Controlled via props.
+ * Text or date input. Controlled or uncontrolled. Pass "value" and "onChange" props to make it controlled 
  */
 const Input: VFC<InputProps> = ({value, onChange, id, placeholder, type="text", classes=[], ...htmlProps}) => {
   return (

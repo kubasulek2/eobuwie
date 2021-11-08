@@ -6,10 +6,7 @@ import addDays from 'date-fns/addDays';
 import isSameDay from 'date-fns/isSameDay';
 import isSameMonth from 'date-fns/isSameMonth';
 import format from 'date-fns/format';
-import {
-	CalendarDate,
-	IMonthDay,
-} from '../hooks/useDatePicker';
+import {CalendarDate, IMonthDay} from '../hooks/useDatePicker';
 
 /**
  * Function takes two dates as Date objects or timestamps and returns array of formatted MonthDay objects.
@@ -21,8 +18,11 @@ export function computeCalendarDays(
 	selectedDate: CalendarDate = new Date(),
 	lastAvailable?: CalendarDate,
 ): IMonthDay[] {
+	// Add some validity checking
 	if (isBefore(endDate, startDate))
 		throw new TypeError('End date must not be before start date');
+	
+	// calculate number of days between two dates
 	const daysDiff = differenceInCalendarDays(endDate, startDate);
 	const today = new Date();
 
@@ -31,9 +31,14 @@ export function computeCalendarDays(
 		isSameMonth(d, selectedDate),
 	);
 
+	// initialize structure to be returned
 	const days: IMonthDay[] = [];
+	
+
 	for (let i = 0; i <= daysDiff; i++) {
+		// this is
 		const currentDay = addDays(startDate, i);
+		// exclude past dates from available dates
 		const notPast = differenceInCalendarDays(currentDay, today) >= 0;
 		let available =
 			notPast && !unavailableDates.some((d) => isSameDay(d, currentDay));
@@ -42,6 +47,7 @@ export function computeCalendarDays(
 		if (lastAvailable && available)
 			available = differenceInCalendarDays(currentDay, lastAvailable) <= 0;
 
+		// set all monthDay properties
 		days.push({
 			available: available,
 			weekDay: getDay(currentDay),

@@ -92,7 +92,7 @@ it('Handles lastAvailable date', () => {
   
   expect(days[0].available).toBe(true);
   expect(days[1].available).toBe(false);
-  // should not be available, becouse after lastAvailable
+  // should not be available, because after lastAvailable
   expect(days[2].available).toBe(false);
 });
 
