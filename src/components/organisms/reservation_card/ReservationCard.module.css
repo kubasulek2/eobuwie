@@ -3,15 +3,18 @@
 .card {
   border: 2px solid #CECECE;
   min-height: 20rem;
-  width: 98%;
-  min-width: 320px;
-  padding: 1.6rem;
+  width: 100%;
+  min-width: 325px;
+  padding: 1.6rem .4rem;
   border-radius: 1px;
 }
 
 /* Form controls */
 
 .formControl {
+  min-width: 310px;
+  max-width: 350px;
+  margin: auto;
   margin-bottom: 1rem;
 }
 
@@ -39,6 +42,12 @@
 
 /* Media queries */
 
+@media (min-width: 380px) {
+  .card {
+    padding: 1.6rem;
+    width: 98%;
+  }
+}
 @media (min-width: 481px) {
   .card {
     width: auto;
