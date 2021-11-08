@@ -7,11 +7,12 @@ Object {
     <div>
       <div
         aria-hidden="true"
+        class="medium"
         data-testid="star"
         role="presentation"
       >
         <svg
-          class="material-icons star medium"
+          class="icon star"
           viewBox="0 0 595.28 841.89"
           xmlns="http://www.w3.org/2000/svg"
         >
@@ -30,11 +31,12 @@ Object {
   "container": <div>
     <div
       aria-hidden="true"
+      class="medium"
       data-testid="star"
       role="presentation"
     >
       <svg
-        class="material-icons star medium"
+        class="icon star"
         viewBox="0 0 595.28 841.89"
         xmlns="http://www.w3.org/2000/svg"
       >

@@ -1,4 +1,5 @@
 import {useEffect, useMemo, useState} from 'react';
+import startOfDay from 'date-fns/startOfDay';
 import {computeCalendarDays} from '../utils/computeCalendarDays';
 import {getCalendarMonthBoundries} from '../utils/getCalendarMonthBoundries';
 import {usePickerKeyboardControl} from './usePickerKeyboardControl';
@@ -30,18 +31,14 @@ export function useDatePicker(
 	/* Handles picker state */
 	const [pickerOpen, setPickerOpen] = useState<boolean>(false);
 	/* Date for calendar manipulation */
-	const [pickerDate, setPickerDate] = useState<Date>(new Date());
+	const [pickerDate, setPickerDate] = useState<Date>(startOfDay(new Date()));
 
 	/* Stores all relevant days informations */
 	const [monthDays, setMonthDays] = useState<IMonthDay[]>([]);
 
-	// Use previous Date because availableDates array may be not memoized, causing constant component rerenders.
-	// Using prevDate will prevent hook belowe from recalculating monthDays all the time
-	const prevDate = usePrevious<Date>(pickerDate);
 
-	/* Remember previous startDate and pickerOpen to optimize state recalculation in useEffect */
+	/* Remember previous startDate to optimize state recalculation in useEffect */
 	const prevStartDate = usePrevious(startDate);
-	const prevOpen = usePrevious(pickerOpen);
 
 	const pickerId = id || 'reservation_date_picker';
 
@@ -55,80 +52,62 @@ export function useDatePicker(
 	usePickerKeyboardControl(pickerOpen, setPickerOpen, pickerId, modalId);
 
 	// Clear dates each time picker is open. Otherwise start date can never be changed
-	// Also when date setting is not complete, clear on close
 	useEffect(() => {
-		if ((pickerOpen && !prevOpen) || (!pickerOpen && !endDate)) {
+		if (pickerOpen) {
 			setStartDate(null);
 			setEndDate(null);
+			setPickerDate(startOfDay(new Date()));
 		}
-	}, [pickerOpen, setStartDate, setEndDate, endDate, prevOpen]);
-	// Compute month days on each calendar date change
-	// This hooks computes days only when startDate not set
-	useEffect(() => {
-		// Prevent uneccessary recomputations
-		if (!pickerOpen) return;
-		// either no date yet or monthDays already computer and date hasn't changed
-		if (!pickerDate || (monthDays.length && pickerDate === prevDate)) return;
+	}, [pickerOpen, setStartDate, setEndDate]);
 
+	
+	// When picker date changes, days must be recalculated
+	useEffect(() => {
+		if (!pickerDate) return;
 		// calculate first and last day to display
 		const [start, end] = getCalendarMonthBoundries(pickerDate);
 
 		// calculate and set MonthDay object's array
-		setMonthDays(computeCalendarDays(start, end, unavailableDates, pickerDate));
-	}, [
-		pickerDate,
-		prevDate,
-		pickerOpen,
-		unavailableDates,
-		setMonthDays,
-		monthDays,
-		startDate,
-	]);
+		setMonthDays(
+			computeCalendarDays(
+				start,
+				end,
+				unavailableDates,
+				pickerDate,
+				startDate ? startDate : undefined,
+			),
+		);
+	}, [pickerDate, unavailableDates, startDate]);
 
-	// Recalculate month days when either startDate, or both startDate and endDate are set.
-	// User shouldn't be able to have unavailable date between start and end dates
-	// This hooks computes days only when at least startDate is set
+	// Recalculate month days when each time start date changed.
+	// User shouldn't be able to pick dates either before startDate, or after first unavailable after startDate
 	useEffect(() => {
-		// Prevent unecessary recomputation
-		if (!pickerOpen || !pickerDate || !monthDays.length) return;
 		if (!startDate) return;
 		if (startDate === prevStartDate) return;
-
+		
 		// calculate first and last day to display
 		const [start, end] = getCalendarMonthBoundries(pickerDate);
-		let lastAvailableTimestamp: number | undefined;
-
-		if (startDate) {
-			// Find last available date after startDate, and render all dates after unavailable
-			const startTimeStamp =
-				'number' === typeof startDate ? startDate : startDate.getTime();
-			const firstUnavailableIndex = monthDays.findIndex(
-				(day) => !day.available && day.timeStamp > startTimeStamp,
-			);
-			// number of undefined if day not found
-			lastAvailableTimestamp = (monthDays[firstUnavailableIndex - 1] || {})
-				.timeStamp;
-		}
 
 		const calDays = computeCalendarDays(
 			start,
 			end,
 			unavailableDates,
 			pickerDate,
-			lastAvailableTimestamp,
+			startDate,
 		);
 
 		// calculate and set MonthDay object's array
 		setMonthDays(calDays);
-	}, [
-		pickerDate,
-		pickerOpen,
-		unavailableDates,
-		setMonthDays,
-		monthDays,
-		startDate,
-		prevStartDate,
-	]);
+	}, [pickerDate, unavailableDates, startDate, prevStartDate]);
+
+	// When date setting is not complete, clear on close picker
+	useEffect(() => {
+		if (pickerOpen) return;
+		if (startDate && endDate) return;
+		setStartDate(null);
+		setEndDate(null);
+	}, [pickerOpen, startDate, endDate, setEndDate, setStartDate]);
+
 
 	return {
 		pickerOpen,

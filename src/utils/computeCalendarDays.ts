@@ -4,7 +4,6 @@ import isBefore from 'date-fns/isBefore';
 import differenceInCalendarDays from 'date-fns/differenceInCalendarDays';
 import addDays from 'date-fns/addDays';
 import isSameDay from 'date-fns/isSameDay';
-import isSameMonth from 'date-fns/isSameMonth';
 import format from 'date-fns/format';
 import {CalendarDate, IMonthDay} from '../hooks/useDatePicker';
 
@@ -15,25 +14,25 @@ export function computeCalendarDays(
 	startDate: CalendarDate,
 	endDate: CalendarDate,
 	unavailableDates: CalendarDate[],
-	selectedDate: CalendarDate = new Date(),
-	lastAvailable?: CalendarDate,
+	calendarDate: CalendarDate = new Date(),
+	selectedDate?: CalendarDate,
 ): IMonthDay[] {
 	// Add some validity checking
 	if (isBefore(endDate, startDate))
 		throw new TypeError('End date must not be before start date');
-	
+
 	// calculate number of days between two dates
 	const daysDiff = differenceInCalendarDays(endDate, startDate);
 	const today = new Date();
 
-	// for performance reasons filter available dates now, rather than check it each time in a loop
-	unavailableDates = unavailableDates.filter((d) =>
-		isSameMonth(d, selectedDate),
-	);
+	// sort it ascending, in case not sorted
+	unavailableDates = unavailableDates.sort((a: any, b: any) => a - b);
+
+	// find first unavailable
+	const unavailableFrom = selectedDate ? unavailableDates.find(d => d > selectedDate) : undefined;
 
 	// initialize structure to be returned
 	const days: IMonthDay[] = [];
-	
 
 	for (let i = 0; i <= daysDiff; i++) {
 		// this is
@@ -43,10 +42,14 @@ export function computeCalendarDays(
 		let available =
 			notPast && !unavailableDates.some((d) => isSameDay(d, currentDay));
 
-		// extra check, if available date do not after lastAvailable
-		if (lastAvailable && available)
-			available = differenceInCalendarDays(currentDay, lastAvailable) <= 0;
+		// extra check, if available before first unavailable
+		if (unavailableFrom && available)
+			available = differenceInCalendarDays(currentDay, unavailableFrom) < 0;
 
+		// extra check, if available date do not before selectedDate
+		if (selectedDate && available)
+			available = differenceInCalendarDays(currentDay, selectedDate) >= 0;
+		
 		// set all monthDay properties
 		days.push({
 			available: available,

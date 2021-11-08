@@ -1,7 +1,7 @@
 import {screen, render} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import addDays from 'date-fns/addDays';
-import {act} from "react-dom/test-utils";
+import {act} from 'react-dom/test-utils';
 import {CalendarDate} from '../../../hooks/useDatePicker';
 import ReservationCard from './ReservationCard';
 
@@ -113,7 +113,7 @@ describe('Functionality', () => {
 	});
 
 	it('Does not call onSubmit when startDate not set', () => {
-		renderer(null, new Date());
+		renderer(null,null);
 		userEvent.click(screen.getByText('submit', {exact: false}));
 		expect(onSubmit).not.toBeCalled();
 	});
@@ -124,10 +124,8 @@ describe('Functionality', () => {
 		expect(onSubmit).not.toBeCalled();
 	});
 
-	it('Does not call onSubmit when startDate in the past', () => {
-		renderer(addDays(new Date(), -2), new Date());
-		userEvent.click(screen.getByText('submit', {exact: false}));
-		expect(onSubmit).not.toBeCalled();
+	it('Cannot set startDate in the past', () => {
+		expect(() => renderer(addDays(new Date(), -2), new Date())).toThrow();
 	});
 
 	it('Does not call onSubmit when endDate in the past', () => {
@@ -142,10 +140,10 @@ describe('Functionality', () => {
 		expect(onSubmit).not.toBeCalled();
 	});
 
-	it('Does not call onSubmit when unavailable date between start and end dates', () => {
-		renderer(new Date(), addDays(new Date(), 3), [addDays(new Date(), 1)]);
-		userEvent.click(screen.getByText('submit', {exact: false}));
-		expect(onSubmit).not.toBeCalled();
+	it('Cannot have unavailable date between start and end dates', () => {
+		expect(() =>
+			renderer(new Date(), addDays(new Date(), 3), [addDays(new Date(), 1)]),
+		).toThrowError();
 	});
 
 	it('Displays error when submit not validated', () => {
@@ -155,7 +153,7 @@ describe('Functionality', () => {
 		userEvent.click(screen.getByText('submit', {exact: false}));
 		expect(errMsg.textContent).toMatch(/Both dates must be set/);
 	});
-	
+
 	it('Clears error when any date is clicked', async () => {
 		renderer();
 		userEvent.click(screen.getByText('submit', {exact: false}));
@@ -165,7 +163,7 @@ describe('Functionality', () => {
 		act(() => userEvent.click(screen.getByText('Check in', {exact: false})));
 		const dates = await screen.findAllByRole('gridcell');
 		/* Must by future date */
-		act(() => userEvent.click(dates[dates.length -1]));
+		act(() => userEvent.click(dates[dates.length - 1]));
 		expect(await screen.findByRole('alert')).toBeEmptyDOMElement();
 	});
 });

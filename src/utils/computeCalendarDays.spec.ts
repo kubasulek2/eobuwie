@@ -77,7 +77,7 @@ it('Handles unavailable dates', () => {
 });
 
 
-it('Handles lastAvailable date', () => {
+it('Handles selected startDate date', () => {
   const startDate = new Date();
   // second of three available
   const endDate = addDays(startDate, 2);
@@ -87,7 +87,7 @@ it('Handles lastAvailable date', () => {
 		endDate,
 		[addDays(startDate, 1)],
 		new Date(),
-		addDays(startDate, 1),
+		startDate, // this is selected startDate, next date is unavailablem, so date after that also shouldn't be available
 	);
   
   expect(days[0].available).toBe(true);

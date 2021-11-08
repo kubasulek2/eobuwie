@@ -33,7 +33,6 @@ export function usePickerKeyboardControl(
 			// prevent default, all keyboard interactions hanlded programatically
 			e.preventDefault();
 			// handle escape key
-			console.log(e.key);
 			if (e.key === 'Escape' || e.key === 'Esc') {
 				setPickerOpen(false);
 				return;
