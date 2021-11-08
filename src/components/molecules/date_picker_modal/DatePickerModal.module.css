@@ -89,15 +89,14 @@
 .calendar_container {
 	padding: .8rem;
 	padding-bottom: 0;
-	display: flex;
-	justify-content: center;
+	width: 100%;
 }
 
 .week_names {
 	display: flex;
 	justify-items: center;
 	padding: 0.8rem 0 1rem;
-	width: 320px;
+	width: 100%;
 }
 
 .week_day {
@@ -109,5 +108,5 @@
 .calendar_row {
 	display: flex;
 	margin-bottom: .5rem;
-	width: 320px;
+	width: 100%;
 }
