@@ -33,7 +33,8 @@ export function usePickerKeyboardControl(
 			// prevent default, all keyboard interactions hanlded programatically
 			e.preventDefault();
 			// handle escape key
-			if (e.key === 'Escape') {
+			console.log(e.key);
+			if (e.key === 'Escape' || e.key === 'Esc') {
 				setPickerOpen(false);
 				return;
 			}
@@ -58,14 +59,14 @@ export function usePickerKeyboardControl(
 			if (!elements.length) return;
 
 			// Tab without shift pressed or down arrow
-			if ((e.key === 'Tab' && !e.shiftKey) || e.key === 'ArrowRight') {
+			if ((e.key === 'Tab' && !e.shiftKey) || e.key === 'ArrowRight' || e.key === 'Right') {
 				if (focusIndex === -1) elements[0].focus();
 				else elements[(focusIndex + 1) % elements.length].focus();
 				return;
 			}
 
 			// Tab without shift pressed or down arrow
-			if ((e.key === 'Tab' && e.shiftKey) || e.key === 'ArrowLeft') {
+			if ((e.key === 'Tab' && e.shiftKey) || e.key === 'ArrowLeft' || e.key === 'Left') {
 				if (focusIndex === -1) elements[elements.length - 1].focus();
 				else
 					elements[
@@ -85,9 +86,14 @@ export function usePickerKeyboardControl(
 			// Will only work if elements are groupped in columns via data-column attribute
 			if (!hasColumns) return;
 
-			if (e.key === 'ArrowUp' || e.key === 'ArrowDown') {
+			if (
+				e.key === 'ArrowUp' ||
+				e.key === 'ArrowDown' ||
+				e.key === 'Down' ||
+				e.key === 'Up'
+			) {
 				// remember key
-				const keyDown = e.key === 'ArrowDown';
+				const keyDown = e.key === 'ArrowDown' || e.key === 'Down';
 				// get current column
 				const colNum = (document.activeElement as HTMLElement).dataset.column;
 				// when not in column yet, focus first or last element, depending on key pressed
