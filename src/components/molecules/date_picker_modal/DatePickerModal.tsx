@@ -73,7 +73,7 @@ const DatePickerModal: VFC<DatePickerModalProps> = ({
 						title="Previous month"
 						data-column={0}
 						className={styles.month_arrow_btn}
-						onClick={() => setPickerDate((prev) => addMonths(prev, -1))}
+						onClick={() => setPickerDate(addMonths(pickerDate, -1))}
 					>
 						<span
 							aria-hidden="true"
@@ -88,10 +88,10 @@ const DatePickerModal: VFC<DatePickerModalProps> = ({
 						{format(pickerDate, 'LLLL')} {pickerDate.getFullYear()}
 					</div>
 					<button
-						title="Previous month"
+						title="Next month"
 						data-column={6}
 						className={styles.month_arrow_btn}
-						onClick={() => setPickerDate((prev) => addMonths(prev, 1))}
+						onClick={() => setPickerDate(addMonths(pickerDate, 1))}
 					>
 						<span
 							aria-hidden="true"

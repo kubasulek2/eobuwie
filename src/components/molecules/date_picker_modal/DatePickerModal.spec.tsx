@@ -116,12 +116,12 @@ describe('Accessibility', () => {
 	
 	it('Icon buttons have accessible title', () => {
 		renderer();
-		expect(screen.getAllByTitle(/^Previous month$|^Next Month$/)).toHaveLength(2);
+		expect(screen.getAllByTitle(/^Previous month$|^Next month$/i)).toHaveLength(2);
 	});
 	
 	it('Icons in icon buttons are hidden from assistive technologies', () => {
 		renderer();
-		const [btn1, btn2] = screen.getAllByTitle(/^Previous month$|^Next Month$/);
+		const [btn1, btn2] = screen.getAllByTitle(/^Previous month$|^Next month$/i);
 		expect(btn1.querySelector('span[aria-hidden="true"]')).toBeInTheDocument();
 		expect(btn2.querySelector('span[aria-hidden="true"]')).toBeInTheDocument();
 	});
