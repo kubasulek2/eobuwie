@@ -8,7 +8,7 @@ import Input from '../../atoms/input/Input';
 import Label from '../../atoms/label/Label';
 import ReservationHeader from '../../molecules/reservation_header/ReservationHeader';
 import DatePicker from '../date_picker/DatePicker';
-import styles from './ReservationCard.module.css';
+import styles from './ReservationCard.module.scss';
 import {ReservationCardProps} from './types';
 
 /**

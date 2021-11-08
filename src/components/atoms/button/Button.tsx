@@ -1,7 +1,7 @@
 import {FC} from 'react';
 import {joinClassNames} from "../../../utils/joinClassNames";
 import {ButtonProps} from "./types";
-import styles from "./Button.module.css";
+import styles from "./Button.module.scss";
 
 /**
  * Button component. Warm red color by default. Can be overritten via "classes" prop.

@@ -2,9 +2,8 @@ import {useCallback, VFC} from 'react';
 import isSameDay from 'date-fns/isSameDay';
 import format from 'date-fns/format';
 import DatePickerModal from '../../molecules/date_picker_modal/DatePickerModal';
-import styles from './DatePicker.module.css';
+import styles from './DatePicker.module.scss';
 import {DatePickerProps} from './types';
-import {text_medium_dark, teal_light_bg, teal} from '../../../styles/colors';
 import {joinClassNames} from '../../../utils/joinClassNames';
 import {useDatePicker, IMonthDay} from '../../../hooks/useDatePicker';
 
@@ -46,12 +45,12 @@ const DatePicker: VFC<DatePickerProps> = ({
 	/* Concatenated classes of dates buttons */
 	const startDateClasses =
 		pickerOpen && !startDate
-			? joinClassNames(styles.date, teal, teal_light_bg)
+			? joinClassNames(styles.date, styles.date_selected)
 			: styles.date;
 
 	const endDateClasses =
 		pickerOpen && startDate && !endDate
-			? joinClassNames(styles.date, teal, teal_light_bg)
+			? joinClassNames(styles.date, styles.date_selected)
 			: styles.date;
 
 	/* Memoized date handler */
@@ -85,7 +84,6 @@ const DatePicker: VFC<DatePickerProps> = ({
 				onClick={() => setPickerOpen((prev) => !prev)}
 				className={joinClassNames(
 					styles.picker,
-					text_medium_dark,
 					pickerOpen ? styles.modal_open : '',
 				)}
 				aria-controls={pickerId + '_dialog'}
@@ -94,7 +92,7 @@ const DatePicker: VFC<DatePickerProps> = ({
 				aria-describedby={pickerId + '_info'}
 			>
 				<span className={startDateClasses}>{startDateString}</span>
-				<span className={joinClassNames(styles.arrow, text_medium_dark)}></span>
+				<span className={styles.arrow}></span>
 				<span className={endDateClasses}>{endDateString}</span>
 			</button>
 			<span className="visually-hidden" id={pickerId + '_info'}>

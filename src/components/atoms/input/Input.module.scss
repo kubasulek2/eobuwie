@@ -1,0 +1,27 @@
+@import 'styles/variables.scss';
+
+
+.input {
+  color: $text_medium;
+  border-radius: 2px;
+  background-color: transparent;
+  border: 2px solid #CECECE;
+  padding: .5rem 1rem;
+  width: 100%;
+  font-size: 1.1rem;
+}
+
+/* Prevent displaying native pickers for keyboard navigation inputs */
+
+.hiddenInput::-webkit-inner-spin-button, .hiddenInput::-webkit-calendar-picker-indicator {
+  display: none;
+}
+
+.input:focus {
+  outline: none;
+  border: 2px solid $cyan;
+}
+
+.input::placeholder {
+  color: $text_light;
+}

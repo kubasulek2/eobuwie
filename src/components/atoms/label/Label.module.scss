@@ -1,0 +1,24 @@
+@import 'styles/variables.scss';
+
+
+.label {
+  color: $text_medium_dark;
+  font-weight: 500;
+  display: block;
+  width: 100%;
+}
+
+.small {
+  margin: 0.3rem 0;
+  font-size: .8rem;
+}
+
+.medium {
+  margin: 0.4rem 0;
+  font-size: 1.2rem;
+}
+
+.large {
+  margin: 0.5rem 0;
+  font-size: 1.5rem;
+}

@@ -1,7 +1,7 @@
 import {VFC} from 'react';
 import {joinClassNames} from '../../../utils/joinClassNames';
 import {StarProps} from './types';
-import styles from './Star.module.css';
+import styles from './Star.module.scss';
 
 /**
  * Rating star component, read only, displays empty, full or half full star icon
@@ -44,11 +44,6 @@ const Star: VFC<StarProps> = ({classes = [], rating = 1, size = 'medium'}) => {
 					points="279.62 101.58 172.81 101.58 139.81 0 139.81 203.15 226.22 265.93 193.21 164.35 279.62 101.58"
 				/>
 			</svg>
-			<svg
-				id="Warstwa_1"
-				data-name="Warstwa 1"
-				xmlns="http://www.w3.org/2000/svg"
-			></svg>
 		</div>
 	);
 };

@@ -1,6 +1,6 @@
 import {VFC} from 'react';
 import {MonthDayProps} from './types';
-import styles from './MonthDay.module.css';
+import styles from './MonthDay.module.scss';
 import {joinClassNames} from '../../../utils/joinClassNames';
 
 /**

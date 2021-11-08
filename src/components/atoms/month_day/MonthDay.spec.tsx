@@ -1,7 +1,7 @@
 import {screen, render} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import MonthDay from './MonthDay';
-import styles from './MonthDay.module.css';
+import styles from './MonthDay.module.scss';
 
 const onClick = jest.fn();
 const dateString = '12/10/2020';

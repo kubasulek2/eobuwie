@@ -1,7 +1,5 @@
 import {useMemo, useState, VFC} from "react";
-import styles from "./App.module.css";
-import {joinClassNames} from "../../../utils/joinClassNames";
-import {gray_light_bg} from "../../../styles/colors";
+import styles from "./App.module.scss";
 import ReservationCard from "../../organisms/reservation_card/ReservationCard";
 import {CalendarDate} from "../../../hooks/useDatePicker";
 import {addDays} from "date-fns";
@@ -15,7 +13,7 @@ const App: VFC = () => {
   const [endDate, setEndDate] = useState<CalendarDate | null>(null);
   const unavailableDates = useMemo(() => [addDays(new Date(), 5)], []);
   return (
-    <div className={joinClassNames(styles.app, gray_light_bg)}>
+    <div className={styles.app}>
       <ReservationCard
         score={2.5}
         votes={100}

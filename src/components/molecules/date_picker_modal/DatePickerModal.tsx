@@ -2,14 +2,8 @@ import {VFC} from 'react';
 import format from 'date-fns/format';
 import addMonths from 'date-fns/addMonths';
 import {DatePickerModalProps} from './types';
-import styles from './DatePickerModal.module.css';
+import styles from './DatePickerModal.module.scss';
 import {joinClassNames} from '../../../utils/joinClassNames';
-import {
-	text_medium_light,
-	text_medium_dark,
-	cyan_bg,
-	text_white,
-} from '../../../styles/colors';
 import MonthDay from '../../atoms/month_day/MonthDay';
 import {IMonthDay} from '../../../hooks/useDatePicker';
 
@@ -67,7 +61,7 @@ const DatePickerModal: VFC<DatePickerModalProps> = ({
 		>
 			<div>
 				<div
-					className={joinClassNames(styles.modal_header, cyan_bg, text_white)}
+					className={styles.modal_header}
 				>
 					<button
 						title="Previous month"
@@ -78,7 +72,6 @@ const DatePickerModal: VFC<DatePickerModalProps> = ({
 						<span
 							aria-hidden="true"
 							className={joinClassNames(
-								text_medium_dark,
 								styles.month_arrow,
 								styles.month_arrow_left,
 							)}
@@ -96,7 +89,6 @@ const DatePickerModal: VFC<DatePickerModalProps> = ({
 						<span
 							aria-hidden="true"
 							className={joinClassNames(
-								text_medium_dark,
 								styles.month_arrow,
 								styles.month_arrow_right,
 							)}
@@ -110,7 +102,7 @@ const DatePickerModal: VFC<DatePickerModalProps> = ({
 								<div
 									key={day}
 									role="columnheader"
-									className={joinClassNames(text_medium_light, styles.week_day)}
+									className={styles.week_day}
 								>
 									{day}
 								</div>

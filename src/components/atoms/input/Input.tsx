@@ -1,8 +1,7 @@
 import {VFC} from 'react';
-import styles from "./Input.module.css";
+import styles from "./Input.module.scss";
 import {InputProps} from "./types";
 import {joinClassNames} from "../../../utils/joinClassNames";
-import {text_medium} from "../../../styles/colors";
 
 /**
  * Text or date input. Controlled or uncontrolled. Pass "value" and "onChange" props to make it controlled 
@@ -11,7 +10,7 @@ const Input: VFC<InputProps> = ({value, onChange, id, placeholder, type="text", 
   return (
     <input
       {...htmlProps}
-      className={joinClassNames(styles.input, text_medium, ...classes)}
+      className={joinClassNames(styles.input, ...classes)}
       value={value}
       onChange={e => onChange ? onChange(e.target.value) : undefined}
       placeholder={placeholder}

@@ -1,0 +1,58 @@
+@import './styles/variables.scss';
+
+/* Card container */
+
+.card {
+  min-height: 20rem;
+  width: 100%;
+  min-width: 320px;
+  padding: 1.6rem .4rem;
+  border-radius: 1px;
+}
+
+/* Form controls */
+
+.formControl {
+  min-width: 310px;
+  max-width: 350px;
+  margin: auto;
+  margin-bottom: 1rem;
+}
+
+.formControl:last-child {
+  margin-bottom: 4rem;
+}
+
+.formControl:nth-last-child(2) {
+  margin-bottom: 2rem;
+}
+
+/* Error message */
+
+.errMsg {
+  margin: 1rem 0;
+  font-size: 0.8rem;
+  min-height: 1rem;
+  visibility: hidden;
+  color: $error
+}
+
+.error {
+  visibility: visible;
+}
+
+/* Media queries */
+
+@media (min-width: 380px) {
+  .card {
+    border: 2px solid $gray_bg;
+    padding: 1.6rem;
+    width: 98%;
+  }
+}
+@media (min-width: 400px) {
+  .card {
+    width: auto;
+    min-width: 25rem;
+  }
+}
