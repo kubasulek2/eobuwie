@@ -17,7 +17,7 @@ const App: VFC = () => {
   return (
     <div className={joinClassNames(styles.app, gray_light_bg)}>
       <ReservationCard
-        score={4.5}
+        score={2.5}
         votes={100}
         price={200}
         unavailableDates={unavailableDates}

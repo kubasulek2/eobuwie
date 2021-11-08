@@ -1,5 +1,6 @@
 .container {
 	box-sizing: border-box;
+	/* do not touch 12% width, this makes IE render width properly, even though it may seams 14.725% would be appropriate */
 	flex: 1 0 12%;
 	display: flex;
 	justify-content: center;

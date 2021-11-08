@@ -20,30 +20,35 @@ const Star: VFC<StarProps> = ({classes = [], rating = 1, size = 'medium'}) => {
 			: size === 'medium'
 			? styles.medium
 			: styles.large;
-	
-			const classlist = joinClassNames(
-		'material-icons',
-		iconName,
-		sizeClass,
-		...classes,
-	); // custom classes will override defaults
 
+	const classlist = joinClassNames(styles.icon, iconName, ...classes); // custom classes will override defaults
+	
 	return (
-		<div data-testid="star" role="presentation" aria-hidden="true">
+		<div
+			data-testid="star"
+			role="presentation"
+			aria-hidden="true"
+			className={sizeClass}
+		>
 			<svg
 				xmlns="http://www.w3.org/2000/svg"
-				viewBox="0 0 595.28 841.89"
+				viewBox="0 0 279.62 265.93"
 				className={classlist}
 			>
 				<polygon
 					className={styles.one}
-					points="162.73 472.56 269.54 472.56 302.54 370.98 302.54 574.13 216.14 636.91 249.14 535.33 162.73 472.56"
+					points="0 101.58 106.8 101.58 139.81 0 139.81 203.15 53.4 265.93 86.41 164.35 0 101.58"
 				/>
 				<polygon
 					className={styles.two}
-					points="442.45 472.56 335.64 472.56 302.64 370.98 302.64 574.13 389.04 636.91 356.04 535.33 442.45 472.56"
+					points="279.62 101.58 172.81 101.58 139.81 0 139.81 203.15 226.22 265.93 193.21 164.35 279.62 101.58"
 				/>
 			</svg>
+			<svg
+				id="Warstwa_1"
+				data-name="Warstwa 1"
+				xmlns="http://www.w3.org/2000/svg"
+			></svg>
 		</div>
 	);
 };
