@@ -47,17 +47,17 @@
 	display: block;
 	position: absolute;
 	bottom: 0;
-	width: 12px;
+	width: 10px;
 	border-top: 1px solid $text_medium_dark;
 	height: 0;
 }
 
 .month_arrow.month_arrow_left::after {
-	transform: rotate(45deg) translate(-8px, 9px);
+	transform: rotate(45deg) translate(-9px, 8px);
 }
 
 .month_arrow.month_arrow_right::after {
-	transform: rotate( -45deg) translate(7px, 8px);
+	transform: rotate( -45deg) translate(8px, 7px);
 }
 
 .month_arrow_left {
