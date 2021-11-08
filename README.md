@@ -1,4 +1,14 @@
 # This project is created as Eobuwie recruitment task.
+To see the project, just open build/index.html in your favourite browser.
+
+## Tested Browsers:
+- Chrome
+- Firefox
+- Edge
+- IE 11
+
+## Important
+- IE versions < 11 are not supported.
 
 ## Available Scripts
 
