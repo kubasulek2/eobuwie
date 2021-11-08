@@ -46,13 +46,13 @@ const ReservationCard: VFC<ReservationCardProps> = ({
 
 		// just in case check if startDate equal or lesser than endDate
 		if (startDate > endDate) {
-			setFormError('Calendar');
+			setFormError('End date may not be before start date.');
 			return false;
 		}
 
 		// just in case check if no unvalid dates chosen
 		if (unavailableDates.some((date) => date >= startDate && date <= endDate)) {
-			setFormError('Calendar');
+			setFormError('Unavailable date(s) are checked');
 			return false;
 		}
 
@@ -85,8 +85,10 @@ const ReservationCard: VFC<ReservationCardProps> = ({
 
 	return (
 		<div className={styles.card} data-testid="reservation_card">
+			<div className={styles.formControl}>
 			<ReservationHeader price={price} score={score} votes={votes} />
 			<Divider />
+			</div>
 			<form onSubmit={handleSubmit} name="reservation_form">
 				<div className={styles.formControl}>
 					<Label idFor="dummy1" title="Dates" size="small" />

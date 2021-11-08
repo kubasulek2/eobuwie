@@ -80,6 +80,7 @@ const DatePicker: VFC<DatePickerProps> = ({
 	return (
 		<div data-testid="date_picker" id={pickerId} className={styles.wrapper}>
 			<button
+				type="button"
 				onMouseDown={(e) => e.preventDefault()}
 				onClick={() => setPickerOpen((prev) => !prev)}
 				className={joinClassNames(

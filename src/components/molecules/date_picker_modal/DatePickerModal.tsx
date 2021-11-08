@@ -104,43 +104,45 @@ const DatePickerModal: VFC<DatePickerModalProps> = ({
 					</button>
 				</div>
 				<div role="grid" className={styles.calendar_container}>
-					<div role="row" className={styles.week_names}>
-						{DAYS_OF_WEEK.map((day) => (
+					<div>
+						<div role="row" className={styles.week_names}>
+							{DAYS_OF_WEEK.map((day) => (
+								<div
+									key={day}
+									role="columnheader"
+									className={joinClassNames(text_medium_light, styles.week_day)}
+								>
+									{day}
+								</div>
+							))}
+						</div>
+						{calendarRows.map((index) => (
 							<div
-								key={day}
-								role="columnheader"
-								className={joinClassNames(text_medium_light, styles.week_day)}
+								role="row"
+								key={'row_' + index}
+								className={styles.calendar_row}
 							>
-								{day}
+								{monthDays
+									.filter((_, i) => i < (index + 1) * 7 && i >= index * 7)
+									.map((day, i) => (
+										<MonthDay
+											onlySelected={isOnlySelected(day)}
+											available={day.available}
+											column={i}
+											dateString={day.dateString}
+											firstSelected={day.timeStamp === startTimestamp}
+											lastSelected={day.timeStamp === endTimestamp}
+											selected={isDaySelected(day)}
+											monthDay={day.monthDay}
+											timeStamp={day.timeStamp}
+											today={day.today}
+											onClick={() => onDateClick(day)}
+											key={day.dateString}
+										/>
+									))}
 							</div>
 						))}
 					</div>
-					{calendarRows.map((index) => (
-						<div
-							role="row"
-							key={'row_' + index}
-							className={styles.calendar_row}
-						>
-							{monthDays
-								.filter((_, i) => i < (index + 1) * 7 && i >= index * 7)
-								.map((day, i) => (
-									<MonthDay
-										onlySelected={isOnlySelected(day)}
-										available={day.available}
-										column={i}
-										dateString={day.dateString}
-										firstSelected={day.timeStamp === startTimestamp}
-										lastSelected={day.timeStamp === endTimestamp}
-										selected={isDaySelected(day)}
-										monthDay={day.monthDay}
-										timeStamp={day.timeStamp}
-										today={day.today}
-										onClick={() => onDateClick(day)}
-										key={day.dateString}
-									/>
-								))}
-						</div>
-					))}
 				</div>
 			</div>
 		</div>

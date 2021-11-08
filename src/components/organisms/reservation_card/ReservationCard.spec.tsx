@@ -1,6 +1,7 @@
 import {screen, render} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import addDays from 'date-fns/addDays';
+import {act} from "react-dom/test-utils";
 import {CalendarDate} from '../../../hooks/useDatePicker';
 import ReservationCard from './ReservationCard';
 
@@ -161,10 +162,10 @@ describe('Functionality', () => {
 		expect(screen.getByRole('alert').textContent).toMatch(
 			/Both dates must be set/,
 		);
-		userEvent.click(screen.getByText("Check in", {exact: false}));
-		const dates = screen.getAllByRole('gridcell');
+		act(() => userEvent.click(screen.getByText('Check in', {exact: false})));
+		const dates = await screen.findAllByRole('gridcell');
 		/* Must by future date */
-		userEvent.click(dates[dates.length -1]);
-		expect(screen.getByRole('alert')).toBeEmptyDOMElement();
+		act(() => userEvent.click(dates[dates.length -1]));
+		expect(await screen.findByRole('alert')).toBeEmptyDOMElement();
 	});
 });
